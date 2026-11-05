@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Petualangan TKA Matematika - SD Negeri 3 Muara Rupit</title>
+<meta name="theme-color" content="#4f46e5">
+<style>
+:root{--ink:#20234b;--muted:#69708f;--primary:#5548d9;--cyan:#19b9c7;--yellow:#ffd45c;--pink:#ff7eaa;--bg:#f4f6ff;--card:#fff;--good:#168b58;--bad:#c33e56}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(135deg,#eef4ff,#fff3f8);color:var(--ink)}
+header{background:linear-gradient(110deg,#5146d8,#18b7c6);color:white;padding:20px 5vw;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}.logo{font-size:34px;background:#ffffff2b;border-radius:16px;padding:9px}.brand h1{font-size:clamp(18px,3vw,27px);margin:0}.brand p{margin:3px 0 0;font-size:13px;opacity:.9}
+main{max-width:1050px;margin:26px auto;padding:0 16px}.card{background:var(--card);border-radius:24px;padding:clamp(18px,3vw,30px);box-shadow:0 12px 34px #33335b12;margin:16px 0}
+.hero{text-align:center;background:linear-gradient(140deg,#fff,#f0f7ff);border:2px solid white}.hero-art{font-size:clamp(45px,9vw,85px);letter-spacing:8px;margin:10px}.hero h2{font-size:clamp(25px,5vw,38px);margin:8px 0;color:#5146d8}.hero p{color:var(--muted);line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.field label{display:block;font-weight:700;margin:0 0 7px}.field input,.field select{width:100%;padding:13px 14px;border:1.5px solid #dce0f2;border-radius:13px;font:inherit;background:#fff;color:var(--ink)}
+button{border:0;border-radius:14px;padding:13px 18px;font:700 15px system-ui;cursor:pointer;transition:.15s}button:hover{transform:translateY(-1px);filter:brightness(.98)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}.primary{background:var(--primary);color:white}.secondary{background:#e9eaff;color:#433bb5}.success{background:#dff8eb;color:#087346}.danger{background:#ffe5ea;color:#a72c45}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}.small{font-size:13px;color:var(--muted)}.hidden{display:none!important}
+.pills{display:flex;gap:8px;flex-wrap:wrap}.pill{background:#f0efff;color:#5146d8;padding:7px 11px;border-radius:30px;font-size:13px;font-weight:700}
+.progress{height:10px;background:#e9eaf6;border-radius:30px;overflow:hidden;margin:12px 0}.progress>div{height:100%;background:linear-gradient(90deg,#5146d8,#18b7c6);width:0;transition:.3s}
+.qtitle{font-size:clamp(18px,3vw,23px);line-height:1.45;margin:18px 0}.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:11px}.opt{background:#f7f8ff;border:2px solid #e4e6f5;text-align:left;min-height:54px;color:var(--ink);display:flex;gap:10px;align-items:center}.opt.selected{border-color:var(--primary);background:#efefff}.opt.correct{border-color:var(--good);background:#e7f8ef}.opt.wrong{border-color:var(--bad);background:#fff0f2}
+.visual{background:#f7f9ff;border:1px dashed #c8ccef;border-radius:18px;padding:18px;text-align:center;margin:12px 0;font-size:clamp(28px,5vw,45px)}.feedback{border-radius:15px;padding:15px;margin:14px 0;line-height:1.5}.feedback.good{background:#e6f8ef;color:#11653f}.feedback.bad{background:#fff0f2;color:#963248}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:10px;border-bottom:1px solid #eceefa;text-align:left}th{background:#f4f5ff}
+.certificate{border:9px double #e3b84f;border-radius:12px;padding:26px;text-align:center;background:linear-gradient(145deg,#fffdf4,#f3f8ff);color:#25265c}.certificate h2{color:#4e46c8;font-size:28px}.certificate .student{font-size:27px;font-weight:800;color:#138b91;margin:12px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:22px}
+@media(max-width:600px){header{padding:16px}.card{border-radius:18px}.options{grid-template-columns:1fr}table{font-size:12px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">🧮</div><div><h1>PETUALANGAN TKA MATEMATIKA</h1><p>SD NEGERI 3 MUARA RUPIT · KELAS VI A & VI B</p></div></div><div class="row"><button class="secondary" id="soundToggle">🔊 Suara ON</button><button class="secondary" id="teacherOpen">🔐 Dasbor Guru</button></div></header>
+<main>
+<section id="welcome" class="card hero">
+ <div class="hero-art">📐 🍕 🔢 🧊</div>
+ <h2>Assalamu'alaikum, Anak Hebat!</h2>
+ <p>Selamat datang di Petualangan TKA Matematika. Ayo pecahkan tantangan, berpikir cerdas, dan raih hasil terbaik. Semangat belajar! 🌟</p>
+ <div class="grid" style="text-align:left;margin-top:24px">
+  <div class="field"><label for="studentName">Nama lengkap siswa</label><input id="studentName" placeholder="Tuliskan nama lengkap"></div>
+  <div class="field"><label for="studentClass">Kelas</label><select id="studentClass"><option value="">Pilih kelas</option><option>VI A</option><option>VI B</option></select></div>
+  <div class="field"><label for="examDate">Tanggal pengerjaan</label><input id="examDate" type="date"></div>
+ </div>
+ <p class="small">Tanggal sengaja dikosongkan agar dapat diisi sebelum permainan dimulai.</p>
+ <button class="primary" id="startBtn">🚀 Mulai Petualangan</button>
+ <p class="small">50 soal · Pilihan ganda · Benar/Salah · Pilihan kompleks · Soal bergambar</p>
+</section>
+
+<section id="game" class="card hidden">
+ <div class="row between"><div class="pills"><span class="pill" id="qCounter">Soal 1/50</span><span class="pill" id="qTopic">Bilangan</span><span class="pill" id="qLevel">Level 1</span></div><strong id="liveScore">Skor: 0</strong></div>
+ <div class="progress"><div id="progressBar"></div></div>
+ <div class="qtitle" id="questionText"></div><div id="questionVisual" class="visual hidden"></div>
+ <div id="options" class="options"></div>
+ <div id="feedback" class="feedback hidden"></div>
+ <div class="row between" style="margin-top:18px"><button class="secondary" id="readBtn">🔈 Bacakan soal</button><button class="primary" id="answerBtn">Periksa Jawaban</button><button class="primary hidden" id="nextBtn">Soal Berikutnya ➜</button></div>
+</section>
+
+<section id="result" class="card hidden">
+ <div class="hero-art">🏆 🎉 ⭐</div><h2 style="text-align:center">Petualangan Selesai!</h2>
+ <div id="resultSummary" style="text-align:center"></div>
+ <div id="certificate" class="certificate">
+  <div style="font-size:44px">🏅</div><h2>SERTIFIKAT HASIL TKA MATEMATIKA</h2><p>Diberikan kepada</p><div class="student" id="certName">Nama Siswa</div>
+  <p id="certClass"></p><h2 id="certScore">0</h2><p>Atas partisipasi dan usaha dalam menyelesaikan Petualangan TKA Matematika</p><p id="certDate"></p>
+  <div class="row between" style="margin-top:38px;text-align:center;align-items:flex-end"><div style="width:48%"><p>Guru Kelas VI</p><br><b>Rasmila Br Ginting, S.Pd</b><br><small>NIP. 198804162025212082</small></div><div style="width:48%"><p>Kepala Sekolah</p><br><b>Candra Melati Putra, S.Pd, M.Pd</b><br><small>NIP. 199009212017081001</small></div></div>
+  <p style="margin-top:25px;font-size:12px">SD NEGERI 3 MUARA RUPIT</p>
+ </div>
+ <div class="row" style="justify-content:center;margin-top:18px"><button class="primary" id="printCert">🖨️ Cetak / Simpan PDF</button><button class="secondary" id="playAgain">🔁 Main Lagi</button></div>
+ <p class="small" id="saveStatus" style="text-align:center"></p>
+</section>
+
+<section id="teacher" class="card hidden">
+ <div class="row between"><div><h2>📊 Dasbor Guru</h2><p class="small">Rekap hasil siswa yang tersimpan di cloud.</p></div><button class="danger" id="teacherLogout">Keluar</button></div>
+ <div id="teacherLogin">
+  <div class="grid"><div class="field"><label>Email guru</label><input type="email" id="teacherEmail" placeholder="Email akun guru"></div><div class="field"><label>Kata sandi</label><input type="password" id="teacherPassword" placeholder="Kata sandi"></div></div>
+  <button class="primary" id="teacherLoginBtn">Masuk sebagai Guru</button><p class="small" id="loginMessage">Akses hanya untuk akun guru yang terdaftar di Firebase Authentication.</p>
+ </div>
+ <div id="teacherPanel" class="hidden">
+  <div class="row"><span class="pill" id="totalAttempts">0 percobaan</span><button class="secondary" id="refreshData">↻ Perbarui</button><button class="success" id="exportExcel">Unduh Excel</button><button class="success" id="exportWord">Unduh Word</button><button class="success" id="exportPDF">Unduh PDF</button></div>
+  <div style="overflow-x:auto;margin-top:15px"><table><thead><tr><th>Nama</th><th>Kelas</th><th>Tanggal</th><th>Benar</th><th>Skor</th><th>Level akhir</th></tr></thead><tbody id="resultsBody"><tr><td colspan="6">Belum ada data.</td></tr></tbody></table></div>
+ </div>
+</section>
+</main>
+<footer>Belajar matematika dengan gembira · SD Negeri 3 Muara Rupit</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.js"></script>
+<script>
+// 1) GANTI konfigurasi ini dengan Firebase Web App milik sekolah.
+const firebaseConfig = {
+ apiKey: "ISI_API_KEY",
+ authDomain: "ISI_PROJECT_ID.firebaseapp.com",
+ projectId: "ISI_PROJECT_ID",
+ storageBucket: "ISI_PROJECT_ID.appspot.com",
+ messagingSenderId: "ISI_MESSAGING_SENDER_ID",
+ appId: "ISI_APP_ID"
+};
+// Email guru harus sama dengan email yang diizinkan pada Firestore Rules.
+const TEACHER_EMAIL = "ISI_EMAIL_GURU";
+let db=null, auth=null, firebaseReady=false;
+try {
+ if(firebaseConfig.apiKey!=="ISI_API_KEY" && firebaseConfig.projectId!=="ISI_PROJECT_ID"){
+  firebase.initializeApp(firebaseConfig); auth=firebase.auth(); db=firebase.firestore(); firebaseReady=true;
+  auth.signInAnonymously().catch(e=>console.warn("Login siswa anonim:",e.message));
+ }
+} catch(e){console.warn(e)}
+const $=id=>document.getElementById(id);
+let questions=[], current=0, answers=[], score=0, checked=false, soundOn=true, level=1, student={}, teacherRows=[];
+const rawQuestions=[
+{t:"Pecahan",f:"pg",q:"Ibu memotong sebuah pizza menjadi 8 bagian sama besar. Adik makan 3 bagian. Pecahan pizza yang dimakan adik adalah …",v:"🍕 dibagi menjadi 8 potong; 3 potong dimakan",o:["🍕 3/8","🍕 5/8","🍕 3/5","🍕 8/3"],a:0,e:"Bagian yang dimakan adalah 3 dari 8 bagian seluruhnya, jadi 3/8."},
+{t:"Pecahan",f:"pg",q:"Pecahan yang senilai dengan 2/3 adalah …",o:["3/5","4/6","2/6","6/12"],a:1,e:"Kalikan pembilang dan penyebut 2/3 dengan 2: hasilnya 4/6."},
+{t:"Pecahan",f:"pg",q:"Hasil dari 1 1/2 + 2 1/4 adalah …",o:["3 1/4","3 1/2","3 3/4","4"],a:2,e:"1 1/2 = 1 2/4. Jadi 1 2/4 + 2 1/4 = 3 3/4."},
+{t:"Pecahan",f:"multi",q:"Pilih semua pecahan yang nilainya sama dengan 1/2.",o:["2/4","3/6","4/10","5/10"],a:[0,1,3],e:"2/4, 3/6, dan 5/10 semuanya dapat disederhanakan menjadi 1/2."},
+{t:"Pecahan",f:"tf",q:"Pernyataan: 3/4 lebih besar daripada 2/3.",o:["Benar","Salah"],a:0,e:"3/4 = 9/12 dan 2/3 = 8/12, sehingga 3/4 lebih besar."},
+{t:"Pecahan",f:"pg",q:"Bentuk pecahan biasa dari 2 3/5 adalah …",o:["5/2","10/5","13/5","12/5"],a:2,e:"(2 × 5) + 3 = 13, sehingga menjadi 13/5."},
+{t:"Pecahan",f:"pg",q:"Hasil 3/4 − 1/8 adalah …",o:["2/8","4/8","5/8","7/8"],a:2,e:"3/4 = 6/8. Maka 6/8 − 1/8 = 5/8."},
+{t:"Pecahan",f:"pg",q:"Urutan pecahan dari yang terkecil adalah …",o:["1/2, 1/4, 3/4","1/4, 1/2, 3/4","3/4, 1/2, 1/4","1/2, 3/4, 1/4"],a:1,e:"Dalam bentuk perempat: 1/4, 2/4, 3/4."},
+{t:"Desimal & Persen",f:"pg",q:"Bentuk desimal dari 7/10 adalah …",o:["0,07","0,7","7,0","0,17"],a:1,e:"Tujuh per sepuluh ditulis 0,7."},
+{t:"Desimal & Persen",f:"pg",q:"25% sama dengan pecahan …",o:["1/2","1/3","1/4","3/4"],a:2,e:"25/100 disederhanakan menjadi 1/4."},
+{t:"Desimal & Persen",f:"pg",q:"Hasil 2,5 + 1,75 adalah …",o:["3,25","4,15","4,25","4,75"],a:2,e:"2,50 + 1,75 = 4,25."},
+{t:"Desimal & Persen",f:"tf",q:"0,6 sama nilainya dengan 60%.",o:["Benar","Salah"],a:0,e:"0,6 × 100% = 60%."},
+{t:"Desimal & Persen",f:"pg",q:"Harga tas Rp80.000 mendapat diskon 10%. Besar diskonnya adalah …",o:["Rp4.000","Rp8.000","Rp10.000","Rp18.000"],a:1,e:"10% × Rp80.000 = Rp8.000."},
+{t:"Desimal & Persen",f:"multi",q:"Pilih semua bilangan yang nilainya lebih besar dari 0,5.",o:["45%","0,75","3/5","0,49"],a:[1,2],e:"0,75 dan 3/5 = 0,6 lebih besar dari 0,5."},
+{t:"Perkalian & Pembagian",f:"pg",q:"Hasil dari 125 × 24 adalah …",o:["2.500","2.750","3.000","3.250"],a:2,e:"125 × 24 = 125 × (20 + 4) = 2.500 + 500 = 3.000."},
+{t:"Perkalian & Pembagian",f:"pg",q:"Hasil 1.440 ÷ 12 adalah …",o:["100","110","120","140"],a:2,e:"12 × 120 = 1.440."},
+{t:"Perkalian & Pembagian",f:"pg",q:"Hasil 3/5 × 10 adalah …",o:["3","5","6","8"],a:2,e:"3/5 × 10 = 30/5 = 6."},
+{t:"Perkalian & Pembagian",f:"tf",q:"Bilangan 936 habis dibagi 3.",o:["Benar","Salah"],a:0,e:"Jumlah digit 9 + 3 + 6 = 18, habis dibagi 3."},
+{t:"Perkalian & Pembagian",f:"pg",q:"Sebuah toko memiliki 18 kotak pensil. Setiap kotak berisi 24 pensil. Jumlah seluruh pensil adalah …",o:["392","412","432","442"],a:2,e:"18 × 24 = 432 pensil."},
+{t:"Perkalian & Pembagian",f:"multi",q:"Pilih operasi yang hasilnya 48.",o:["6 × 8","96 ÷ 2","12 × 3","144 ÷ 3"],a:[0,1,3],e:"6×8=48, 96÷2=48, dan 144÷3=48."},
+{t:"Perkalian & Pembagian",f:"pg",q:"Ibu memiliki 2,4 kg tepung. Tepung dibagi sama banyak ke dalam 6 kantong. Isi setiap kantong adalah …",o:["0,2 kg","0,4 kg","0,6 kg","1,4 kg"],a:1,e:"2,4 ÷ 6 = 0,4 kg."},
+{t:"Soal Cerita & Logika",f:"pg",q:"Perpustakaan memiliki 245 buku cerita. Sekolah membeli 128 buku lagi, lalu 76 buku dipinjam. Buku yang tersisa adalah …",o:["287","297","307","317"],a:1,e:"245 + 128 − 76 = 297 buku."},
+{t:"Soal Cerita & Logika",f:"pg",q:"Pola bilangan 4, 8, 16, 32, … Bilangan berikutnya adalah …",o:["36","48","54","64"],a:3,e:"Setiap bilangan dikalikan 2. Jadi 32 × 2 = 64."},
+{t:"Soal Cerita & Logika",f:"tf",q:"Jika semua sisi persegi sama panjang, maka keliling persegi adalah 4 kali panjang sisinya.",o:["Benar","Salah"],a:0,e:"Persegi mempunyai empat sisi sama panjang, sehingga K = 4 × sisi."},
+{t:"Soal Cerita & Logika",f:"pg",q:"Dina membaca 15 halaman setiap hari selama 6 hari. Jika bukunya 120 halaman, sisa halaman yang belum dibaca adalah …",o:["20","25","30","35"],a:2,e:"15 × 6 = 90 halaman. 120 − 90 = 30 halaman."},
+{t:"Soal Cerita & Logika",f:"multi",q:"Di sebuah kelas, jumlah siswa 32 orang. Pilih pernyataan yang benar jika 3/8 siswa mengikuti klub sains.",o:["12 siswa ikut klub sains","20 siswa tidak ikut klub sains","1/4 siswa ikut klub sains","Jumlah siswa klub sains dan bukan klub sains 32"],a:[0,1,3],e:"3/8 × 32 = 12; sisanya 20. Jumlah keduanya 32."},
+{t:"Soal Cerita & Logika",f:"pg",q:"Rani lebih tinggi dari Budi. Budi lebih tinggi dari Sita. Siapakah yang paling pendek?",o:["Rani","Budi","Sita","Tidak dapat ditentukan"],a:2,e:"Urutan tinggi: Rani, Budi, lalu Sita. Jadi Sita paling pendek."},
+{t:"Soal Cerita & Logika",f:"pg",q:"Sebuah bus berangkat pukul 07.35 dan tiba pukul 10.05. Lama perjalanan adalah …",o:["2 jam 20 menit","2 jam 30 menit","2 jam 40 menit","3 jam 30 menit"],a:1,e:"Dari 07.35 ke 09.35 = 2 jam, lalu ke 10.05 = 30 menit."},
+{t:"Soal Cerita & Logika",f:"pg",q:"Empat anak membagi 3 kue sama besar. Setiap anak mendapat …",o:["1/2 kue","2/3 kue","3/4 kue","4/3 kue"],a:2,e:"3 kue dibagi 4 anak = 3/4 kue per anak."},
+{t:"Bangun Datar & Luas",f:"pg",q:"Sebuah persegi memiliki sisi 9 cm. Luasnya adalah …",v:"🟦 Persegi: sisi 9 cm",o:["18 cm²","36 cm²","72 cm²","81 cm²"],a:3,e:"Luas persegi = sisi × sisi = 9 × 9 = 81 cm²."},
+{t:"Bangun Datar & Luas",f:"pg",q:"Persegi panjang panjangnya 12 cm dan lebarnya 5 cm. Luasnya adalah …",v:"▭ p = 12 cm, l = 5 cm",o:["17 cm²","34 cm²","60 cm²","120 cm²"],a:2,e:"L = panjang × lebar = 12 × 5 = 60 cm²."},
+{t:"Bangun Datar & Luas",f:"pg",q:"Segitiga memiliki alas 10 cm dan tinggi 8 cm. Luasnya adalah …",v:"△ alas 10 cm; tinggi 8 cm",o:["18 cm²","40 cm²","80 cm²","90 cm²"],a:1,e:"Luas segitiga = 1/2 × alas × tinggi = 40 cm²."},
+{t:"Bangun Datar & Luas",f:"pg",q:"Keliling persegi dengan sisi 7 cm adalah …",o:["14 cm","21 cm","28 cm","49 cm"],a:2,e:"Keliling = 4 × 7 = 28 cm."},
+{t:"Bangun Datar & Luas",f:"tf",q:"Luas jajargenjang dihitung dengan alas dikalikan tinggi.",o:["Benar","Salah"],a:0,e:"Rumus luas jajargenjang adalah alas × tinggi."},
+{t:"Bangun Datar & Luas",f:"pg",q:"Sebuah trapesium memiliki sisi sejajar 8 cm dan 14 cm serta tinggi 5 cm. Luasnya …",o:["45 cm²","50 cm²","55 cm²","60 cm²"],a:2,e:"L = 1/2 × (8 + 14) × 5 = 55 cm²."},
+{t:"Bangun Datar & Luas",f:"multi",q:"Pilih semua bangun datar yang mempunyai 4 sisi.",o:["Persegi","Segitiga","Persegi panjang","Trapesium"],a:[0,2,3],e:"Persegi, persegi panjang, dan trapesium memiliki empat sisi."},
+{t:"Bangun Datar & Luas",f:"pg",q:"Luas sebuah lingkaran dengan jari-jari 7 cm (π = 22/7) adalah …",o:["44 cm²","77 cm²","154 cm²","308 cm²"],a:2,e:"L = π × r × r = 22/7 × 7 × 7 = 154 cm²."},
+{t:"Bangun Ruang",f:"pg",q:"Kubus memiliki … rusuk.",v:"🧊",o:["⬡ 6","🧊 8","📦 12","🔺 16"],a:2,e:"Kubus mempunyai 12 rusuk, 6 sisi, dan 8 titik sudut."},
+{t:"Bangun Ruang",f:"pg",q:"Balok memiliki panjang 8 cm, lebar 4 cm, dan tinggi 3 cm. Volumenya …",v:"📦 p=8 cm, l=4 cm, t=3 cm",o:["15 cm³","32 cm³","64 cm³","96 cm³"],a:3,e:"Volume balok = p × l × t = 8 × 4 × 3 = 96 cm³."},
+{t:"Bangun Ruang",f:"tf",q:"Kubus dan balok sama-sama memiliki 6 sisi.",o:["Benar","Salah"],a:0,e:"Keduanya mempunyai enam sisi."},
+{t:"Bangun Ruang",f:"pg",q:"Volume kubus dengan panjang rusuk 5 cm adalah …",o:["25 cm³","75 cm³","100 cm³","125 cm³"],a:3,e:"Volume kubus = s × s × s = 5 × 5 × 5 = 125 cm³."},
+{t:"Bangun Ruang",f:"multi",q:"Pilih semua benda yang bentuknya menyerupai tabung.",o:["Kaleng susu","Dadu","Gelas silinder","Bola basket"],a:[0,2],e:"Kaleng susu dan gelas silinder menyerupai tabung."},
+{t:"Bangun Ruang",f:"pg",q:"Bangun ruang yang mempunyai satu titik puncak dan alas berbentuk lingkaran adalah …",o:["🧊 Kubus","🍦 Kerucut","🥫 Tabung","📦 Balok"],a:1,e:"Kerucut memiliki alas lingkaran dan satu titik puncak."},
+{t:"Data & Penalaran",f:"pg",q:"Data buku yang dibaca: Ani 4, Beni 6, Cici 3, Dodi 7. Siapa membaca buku paling banyak?",v:"📊 Ani 4 | Beni 6 | Cici 3 | Dodi 7",o:["Ani","Beni","Cici","Dodi"],a:3,e:"Jumlah terbesar adalah 7 buku, yaitu Dodi."},
+{t:"Data & Penalaran",f:"pg",q:"Rata-rata dari 6, 8, 10, dan 12 adalah …",o:["8","9","10","11"],a:1,e:"(6 + 8 + 10 + 12) ÷ 4 = 36 ÷ 4 = 9."},
+{t:"Data & Penalaran",f:"tf",q:"Diagram batang dapat digunakan untuk membandingkan jumlah beberapa kategori.",o:["Benar","Salah"],a:0,e:"Diagram batang memudahkan perbandingan data antarkategori."},
+{t:"Data & Penalaran",f:"pg",q:"KPK dari 6 dan 8 adalah …",o:["12","18","24","48"],a:2,e:"Kelipatan 6: 6,12,18,24. Kelipatan 8: 8,16,24. KPK = 24."},
+{t:"Data & Penalaran",f:"pg",q:"FPB dari 24 dan 36 adalah …",o:["6","8","12","18"],a:2,e:"Faktor persekutuan terbesar 24 dan 36 adalah 12."},
+{t:"Data & Penalaran",f:"multi",q:"Pilih semua bilangan yang merupakan kelipatan 9.",o:["18","27","32","45"],a:[0,1,3],e:"18=9×2, 27=9×3, dan 45=9×5."},
+{t:"Data & Penalaran",f:"pg",q:"Sebuah pola dimulai dari 2, 5, 8, 11, … Aturan polanya adalah …",o:["Tambah 2","Tambah 3","Kali 2","Kurangi 3"],a:1,e:"Setiap bilangan bertambah 3."}
+];
+questions=[]; let questionPool=[];
+function say(text){if(!soundOn||!("speechSynthesis"in window))return; speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang="id-ID";u.rate=.92;speechSynthesis.speak(u)}
+function beep(ok){if(!soundOn)return;try{let c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?660:220;g.gain.value=.07;o.start();o.stop(c.currentTime+.13)}catch(e){}}
+$("soundToggle").onclick=()=>{soundOn=!soundOn;$("soundToggle").textContent=soundOn?"🔊 Suara ON":"🔇 Suara OFF";if(!soundOn&&"speechSynthesis"in window)speechSynthesis.cancel()};
+$("teacherOpen").onclick=()=>{hideAll();$("teacher").classList.remove("hidden")};
+function hideAll(){["welcome","game","result","teacher"].forEach(x=>$(x).classList.add("hidden"))}
+$("startBtn").onclick=()=>{
+ const name=$("studentName").value.trim(),cl=$("studentClass").value,date=$("examDate").value;
+ if(!name||!cl||!date){alert("Lengkapi nama, kelas, dan tanggal terlebih dahulu.");return}
+ student={name,cl,date};current=0;score=0;level=1;answers=[];selected=[];
+ questionPool=rawQuestions.map((q,i)=>({...q,id:i,d:i<17?1:(i<34?2:3)}));
+ questions=[];hideAll();$("game").classList.remove("hidden");pickNextQuestion();
+};
+function pickNextQuestion(){
+ const candidates=questionPool.filter(q=>q.d===level);
+ const pool=candidates.length?candidates:questionPool;
+ const next=pool[0];
+ questionPool=questionPool.filter(q=>q.id!==next.id);
+ questions.push(next);current=questions.length-1;renderQuestion();
+}
+function renderQuestion(){
+ checked=false;let q=questions[current];$("qCounter").textContent=`Soal ${current+1}/50`;$("qTopic").textContent=q.t;$("qLevel").textContent=`Level ${level}`;$("liveScore").textContent=`Skor: ${score}`;$("progressBar").style.width=(current/50*100)+"%";$("questionText").textContent=q.q;
+ $("questionVisual").classList.toggle("hidden",!q.v);$("questionVisual").textContent=q.v||"";
+ $("options").innerHTML="";$("feedback").classList.add("hidden");$("answerBtn").classList.remove("hidden");$("nextBtn").classList.add("hidden");
+ if(q.f==="multi"){$("questionText").textContent+=" (Pilih semua jawaban yang benar.)"}
+ q.o.forEach((v,i)=>{let b=document.createElement("button");b.className="opt";b.innerHTML=`<span>${q.f==="tf"?"":String.fromCharCode(65+i)+". "}</span><span>${v}</span>`;b.onclick=()=>selectOption(i,b);$("options").appendChild(b)});
+}
+let selected=[];
+function selectOption(i,b){if(checked)return;let q=questions[current];if(q.f==="multi"){if(selected.includes(i)){selected=selected.filter(x=>x!==i);b.classList.remove("selected")}else{selected.push(i);b.classList.add("selected")}}else{selected=[i];[...$("options").children].forEach(x=>x.classList.remove("selected"));b.classList.add("selected")}}
+$("answerBtn").onclick=()=>{
+ if(!selected.length){alert("Pilih jawaban terlebih dahulu.");return}
+ checked=true;let q=questions[current],correct=Array.isArray(q.a)?q.a.slice().sort().join(",")===selected.slice().sort().join(","):selected[0]===q.a;
+ if(correct)score+=2;
+ answers.push({question:q.q,topic:q.t,correct,selected:selected.slice(),key:q.a});
+ [...$("options").children].forEach((b,i)=>{let yes=Array.isArray(q.a)?q.a.includes(i):q.a===i;if(yes)b.classList.add("correct");else if(selected.includes(i))b.classList.add("wrong");b.disabled=true});
+ $("feedback").className="feedback "+(correct?"good":"bad");$("feedback").innerHTML=(correct?"🌟 <b>Hebat! Jawabanmu benar.</b> ":"💪 <b>Tetap semangat! Jawaban yang tepat belum sesuai.</b> ")+q.e;
+ beep(correct);$("answerBtn").classList.add("hidden");$("nextBtn").classList.remove("hidden");$("liveScore").textContent=`Skor: ${score}`;
+ // Adaptive level changes based on the student's running accuracy.
+ let acc=answers.filter(x=>x.correct).length/answers.length;
+ // Penyesuaian kesulitan: akurasi >=80% naik ke level 3; >=55% ke level 2; selebihnya level 1.
+ level=acc>=.8?3:acc>=.55?2:1;
+ $("qLevel").textContent=`Level ${level}`;
+};
+$("nextBtn").onclick=()=>{selected=[];if(questions.length>=50)finish();else pickNextQuestion()};
+$("readBtn").onclick=()=>say(questions[current].q+" "+questions[current].o.join(". "));
+async function finish(){
+ hideAll();$("result").classList.remove("hidden");let correct=answers.filter(x=>x.correct).length,finalScore=Math.round(correct/50*100);
+ $("resultSummary").innerHTML=`<h3>${student.name} · ${student.cl}</h3><p>Jawaban benar: <b>${correct} dari 50</b></p><h2 style="color:#5146d8;font-size:42px">${finalScore}</h2><p>Level akhir: ${level}</p>`;
+ $("certName").textContent=student.name;$("certClass").textContent=`Kelas ${student.cl} · SD Negeri 3 Muara Rupit`;$("certScore").textContent=`NILAI ${finalScore}`;$("certDate").textContent=`Tanggal: ${student.date}`;
+ let record={...student,correct,score:finalScore,level,createdAt:new Date().toISOString(),answers};
+ $("saveStatus").textContent="Menyimpan hasil...";
+ try{
+  if(firebaseReady){await auth.signInAnonymously().catch(()=>{});await db.collection("Hasil_TKA_Matematika").add(record);$("saveStatus").textContent="✅ Hasil berhasil disimpan ke cloud Firebase."}
+  else{$("saveStatus").textContent="⚠️ Firebase belum dikonfigurasi. Hasil ini belum tersimpan ke cloud."}
+ }catch(e){$("saveStatus").textContent="Gagal menyimpan ke cloud: "+e.message}
+ window.lastRecord=record;
+}
+$("playAgain").onclick=()=>{hideAll();$("welcome").classList.remove("hidden");$("studentName").value=student.name;$("studentClass").value=student.cl;$("examDate").value=student.date};
+$("printCert").onclick=()=>{let w=window.open("","_blank");if(!w){alert("Izinkan pop-up untuk mencetak sertifikat.");return}w.document.write(`<html><head><title>Sertifikat</title><style>body{font-family:Arial;padding:35px}.certificate{border:9px double #d7ad43;padding:35px;text-align:center;background:#fffdf4;color:#25265c}.student{font-size:28px;font-weight:bold;color:#138b91}h2{color:#5146d8}.sign{display:flex;justify-content:space-around;margin-top:60px}</style></head><body>${$("certificate").outerHTML}</body></html>`);w.document.close();w.print()};
+$("teacherLoginBtn").onclick=async()=>{
+ if(!firebaseReady){$("loginMessage").textContent="Isi firebaseConfig terlebih dahulu di index.html.";return}
+ let email=$("teacherEmail").value.trim(),pass=$("teacherPassword").value;
+ try{let cred=await auth.signInWithEmailAndPassword(email,pass);if(email.toLowerCase()!==TEACHER_EMAIL.toLowerCase()){await auth.signOut();throw new Error("Email ini tidak memiliki akses dasbor guru.")}$("teacherLogin").classList.add("hidden");$("teacherPanel").classList.remove("hidden");await loadTeacherData()}
+ catch(e){$("loginMessage").textContent="Gagal masuk: "+e.message}
+};
+async function loadTeacherData(){
+ try{let snap=await db.collection("Hasil_TKA_Matematika").orderBy("createdAt","desc").get();teacherRows=snap.docs.map(d=>d.data());$("totalAttempts").textContent=teacherRows.length+" percobaan";$("resultsBody").innerHTML="";
+ if(!teacherRows.length)$("resultsBody").innerHTML='<tr><td colspan="6">Belum ada data.</td></tr>';
+ teacherRows.forEach(r=>{let tr=document.createElement("tr");[r.name,r.cl,r.date,r.correct,r.score,r.level].forEach(v=>{let td=document.createElement("td");td.textContent=v??"";tr.appendChild(td)});$("resultsBody").appendChild(tr)})}
+ catch(e){$("resultsBody").innerHTML=`<tr><td colspan="6">Tidak dapat membaca data: ${e.message}</td></tr>`}
+}
+$("refreshData").onclick=loadTeacherData;
+$("teacherLogout").onclick=async()=>{if(auth)await auth.signOut();$("teacherLogin").classList.remove("hidden");$("teacherPanel").classList.add("hidden");$("teacherPassword").value=""};
+function exportRows(){return teacherRows.map(r=>({"Nama Siswa":r.name,"Kelas":r.cl,"Tanggal":r.date,"Jawaban Benar":r.correct,"Nilai":r.score,"Level Akhir":r.level,"Waktu Simpan":r.createdAt}))}
+$("exportExcel").onclick=()=>{if(!teacherRows.length)return alert("Belum ada data.");let ws=XLSX.utils.json_to_sheet(exportRows()),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Hasil TKA Matematika");XLSX.writeFile(wb,"Rekap_TKA_Matematika_SD_Muara_Rupit.xlsx")};
+$("exportPDF").onclick=()=>{if(!teacherRows.length)return alert("Belum ada data.");let {jsPDF}=window.jspdf,doc=new jsPDF();doc.text("REKAP HASIL TKA MATEMATIKA",14,16);doc.text("SD NEGERI 3 MUARA RUPIT",14,24);let y=36;teacherRows.forEach((r,i)=>{let line=`${i+1}. ${r.name} | ${r.cl} | ${r.date} | Benar ${r.correct}/50 | Nilai ${r.score}`;doc.text(line,14,y);y+=8;if(y>280){doc.addPage();y=18}});doc.save("Rekap_TKA_Matematika.pdf")};
+$("exportWord").onclick=async()=>{if(!teacherRows.length)return alert("Belum ada data.");try{const {Document,Packer,Paragraph,TextRun}=docx;let children=[new Paragraph({children:[new TextRun({text:"REKAP HASIL TKA MATEMATIKA",bold:true,size:30})]}),new Paragraph("SD NEGERI 3 MUARA RUPIT")];teacherRows.forEach((r,i)=>children.push(new Paragraph(`${i+1}. ${r.name} | ${r.cl} | ${r.date} | Benar ${r.correct}/50 | Nilai ${r.score}`)));let d=new Document({sections:[{children}]});let blob=await Packer.toBlob(d);let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Rekap_TKA_Matematika.docx";a.click();URL.revokeObjectURL(a.href)}catch(e){alert("Ekspor Word gagal: "+e.message)}};
+</script>
+</body></html>
