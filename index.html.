@@ -1,236 +1,728 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Petualangan TKA Matematika - SD Negeri 3 Muara Rupit</title>
-<meta name="theme-color" content="#4f46e5">
-<style>
-:root{--ink:#20234b;--muted:#69708f;--primary:#5548d9;--cyan:#19b9c7;--yellow:#ffd45c;--pink:#ff7eaa;--bg:#f4f6ff;--card:#fff;--good:#168b58;--bad:#c33e56}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(135deg,#eef4ff,#fff3f8);color:var(--ink)}
-header{background:linear-gradient(110deg,#5146d8,#18b7c6);color:white;padding:20px 5vw;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px}.logo{font-size:34px;background:#ffffff2b;border-radius:16px;padding:9px}.brand h1{font-size:clamp(18px,3vw,27px);margin:0}.brand p{margin:3px 0 0;font-size:13px;opacity:.9}
-main{max-width:1050px;margin:26px auto;padding:0 16px}.card{background:var(--card);border-radius:24px;padding:clamp(18px,3vw,30px);box-shadow:0 12px 34px #33335b12;margin:16px 0}
-.hero{text-align:center;background:linear-gradient(140deg,#fff,#f0f7ff);border:2px solid white}.hero-art{font-size:clamp(45px,9vw,85px);letter-spacing:8px;margin:10px}.hero h2{font-size:clamp(25px,5vw,38px);margin:8px 0;color:#5146d8}.hero p{color:var(--muted);line-height:1.6}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.field label{display:block;font-weight:700;margin:0 0 7px}.field input,.field select{width:100%;padding:13px 14px;border:1.5px solid #dce0f2;border-radius:13px;font:inherit;background:#fff;color:var(--ink)}
-button{border:0;border-radius:14px;padding:13px 18px;font:700 15px system-ui;cursor:pointer;transition:.15s}button:hover{transform:translateY(-1px);filter:brightness(.98)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}.primary{background:var(--primary);color:white}.secondary{background:#e9eaff;color:#433bb5}.success{background:#dff8eb;color:#087346}.danger{background:#ffe5ea;color:#a72c45}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}.small{font-size:13px;color:var(--muted)}.hidden{display:none!important}
-.pills{display:flex;gap:8px;flex-wrap:wrap}.pill{background:#f0efff;color:#5146d8;padding:7px 11px;border-radius:30px;font-size:13px;font-weight:700}
-.progress{height:10px;background:#e9eaf6;border-radius:30px;overflow:hidden;margin:12px 0}.progress>div{height:100%;background:linear-gradient(90deg,#5146d8,#18b7c6);width:0;transition:.3s}
-.qtitle{font-size:clamp(18px,3vw,23px);line-height:1.45;margin:18px 0}.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:11px}.opt{background:#f7f8ff;border:2px solid #e4e6f5;text-align:left;min-height:54px;color:var(--ink);display:flex;gap:10px;align-items:center}.opt.selected{border-color:var(--primary);background:#efefff}.opt.correct{border-color:var(--good);background:#e7f8ef}.opt.wrong{border-color:var(--bad);background:#fff0f2}
-.visual{background:#f7f9ff;border:1px dashed #c8ccef;border-radius:18px;padding:18px;text-align:center;margin:12px 0;font-size:clamp(28px,5vw,45px)}.feedback{border-radius:15px;padding:15px;margin:14px 0;line-height:1.5}.feedback.good{background:#e6f8ef;color:#11653f}.feedback.bad{background:#fff0f2;color:#963248}
-table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:10px;border-bottom:1px solid #eceefa;text-align:left}th{background:#f4f5ff}
-.certificate{border:9px double #e3b84f;border-radius:12px;padding:26px;text-align:center;background:linear-gradient(145deg,#fffdf4,#f3f8ff);color:#25265c}.certificate h2{color:#4e46c8;font-size:28px}.certificate .student{font-size:27px;font-weight:800;color:#138b91;margin:12px}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:22px}
-@media(max-width:600px){header{padding:16px}.card{border-radius:18px}.options{grid-template-columns:1fr}table{font-size:12px}}
-</style>
-</head>
-<body>
-<header><div class="brand"><div class="logo">🧮</div><div><h1>PETUALANGAN TKA MATEMATIKA</h1><p>SD NEGERI 3 MUARA RUPIT · KELAS VI A & VI B</p></div></div><div class="row"><button class="secondary" id="soundToggle">🔊 Suara ON</button><button class="secondary" id="teacherOpen">🔐 Dasbor Guru</button></div></header>
-<main>
-<section id="welcome" class="card hero">
- <div class="hero-art">📐 🍕 🔢 🧊</div>
- <h2>Assalamu'alaikum, Anak Hebat!</h2>
- <p>Selamat datang di Petualangan TKA Matematika. Ayo pecahkan tantangan, berpikir cerdas, dan raih hasil terbaik. Semangat belajar! 🌟</p>
- <div class="grid" style="text-align:left;margin-top:24px">
-  <div class="field"><label for="studentName">Nama lengkap siswa</label><input id="studentName" placeholder="Tuliskan nama lengkap"></div>
-  <div class="field"><label for="studentClass">Kelas</label><select id="studentClass"><option value="">Pilih kelas</option><option>VI A</option><option>VI B</option></select></div>
-  <div class="field"><label for="examDate">Tanggal pengerjaan</label><input id="examDate" type="date"></div>
- </div>
- <p class="small">Tanggal sengaja dikosongkan agar dapat diisi sebelum permainan dimulai.</p>
- <button class="primary" id="startBtn">🚀 Mulai Petualangan</button>
- <p class="small">50 soal · Pilihan ganda · Benar/Salah · Pilihan kompleks · Soal bergambar</p>
-</section>
+import React, { useState, useEffect, useRef } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, getDocs, where } from 'firebase/firestore';
+import { Volume2, VolumeX, Music, Music3, CheckCircle, XCircle, Award, Download, Printer, ArrowRight, Save, ShieldAlert } from 'lucide-react';
 
-<section id="game" class="card hidden">
- <div class="row between"><div class="pills"><span class="pill" id="qCounter">Soal 1/50</span><span class="pill" id="qTopic">Bilangan</span><span class="pill" id="qLevel">Level 1</span></div><strong id="liveScore">Skor: 0</strong></div>
- <div class="progress"><div id="progressBar"></div></div>
- <div class="qtitle" id="questionText"></div><div id="questionVisual" class="visual hidden"></div>
- <div id="options" class="options"></div>
- <div id="feedback" class="feedback hidden"></div>
- <div class="row between" style="margin-top:18px"><button class="secondary" id="readBtn">🔈 Bacakan soal</button><button class="primary" id="answerBtn">Periksa Jawaban</button><button class="primary hidden" id="nextBtn">Soal Berikutnya ➜</button></div>
-</section>
+// --- Firebase Initialization ---
+const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+const app = Object.keys(firebaseConfig).length > 0 ? initializeApp(firebaseConfig) : null;
+const auth = app ? getAuth(app) : null;
+const db = app ? getFirestore(app) : null;
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'sd3-muara-rupit-quiz';
 
-<section id="result" class="card hidden">
- <div class="hero-art">🏆 🎉 ⭐</div><h2 style="text-align:center">Petualangan Selesai!</h2>
- <div id="resultSummary" style="text-align:center"></div>
- <div id="certificate" class="certificate">
-  <div style="font-size:44px">🏅</div><h2>SERTIFIKAT HASIL TKA MATEMATIKA</h2><p>Diberikan kepada</p><div class="student" id="certName">Nama Siswa</div>
-  <p id="certClass"></p><h2 id="certScore">0</h2><p>Atas partisipasi dan usaha dalam menyelesaikan Petualangan TKA Matematika</p><p id="certDate"></p>
-  <div class="row between" style="margin-top:38px;text-align:center;align-items:flex-end"><div style="width:48%"><p>Guru Kelas VI</p><br><b>Rasmila Br Ginting, S.Pd</b><br><small>NIP. 198804162025212082</small></div><div style="width:48%"><p>Kepala Sekolah</p><br><b>Candra Melati Putra, S.Pd, M.Pd</b><br><small>NIP. 199009212017081001</small></div></div>
-  <p style="margin-top:25px;font-size:12px">SD NEGERI 3 MUARA RUPIT</p>
- </div>
- <div class="row" style="justify-content:center;margin-top:18px"><button class="primary" id="printCert">🖨️ Cetak / Simpan PDF</button><button class="secondary" id="playAgain">🔁 Main Lagi</button></div>
- <p class="small" id="saveStatus" style="text-align:center"></p>
-</section>
-
-<section id="teacher" class="card hidden">
- <div class="row between"><div><h2>📊 Dasbor Guru</h2><p class="small">Rekap hasil siswa yang tersimpan di cloud.</p></div><button class="danger" id="teacherLogout">Keluar</button></div>
- <div id="teacherLogin">
-  <div class="grid"><div class="field"><label>Email guru</label><input type="email" id="teacherEmail" placeholder="Email akun guru"></div><div class="field"><label>Kata sandi</label><input type="password" id="teacherPassword" placeholder="Kata sandi"></div></div>
-  <button class="primary" id="teacherLoginBtn">Masuk sebagai Guru</button><p class="small" id="loginMessage">Akses hanya untuk akun guru yang terdaftar di Firebase Authentication.</p>
- </div>
- <div id="teacherPanel" class="hidden">
-  <div class="row"><span class="pill" id="totalAttempts">0 percobaan</span><button class="secondary" id="refreshData">↻ Perbarui</button><button class="success" id="exportExcel">Unduh Excel</button><button class="success" id="exportWord">Unduh Word</button><button class="success" id="exportPDF">Unduh PDF</button></div>
-  <div style="overflow-x:auto;margin-top:15px"><table><thead><tr><th>Nama</th><th>Kelas</th><th>Tanggal</th><th>Benar</th><th>Skor</th><th>Level akhir</th></tr></thead><tbody id="resultsBody"><tr><td colspan="6">Belum ada data.</td></tr></tbody></table></div>
- </div>
-</section>
-</main>
-<footer>Belajar matematika dengan gembira · SD Negeri 3 Muara Rupit</footer>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.js"></script>
-<script>
-// 1) GANTI konfigurasi ini dengan Firebase Web App milik sekolah.
-const firebaseConfig = {
- apiKey: "ISI_API_KEY",
- authDomain: "ISI_PROJECT_ID.firebaseapp.com",
- projectId: "ISI_PROJECT_ID",
- storageBucket: "ISI_PROJECT_ID.appspot.com",
- messagingSenderId: "ISI_MESSAGING_SENDER_ID",
- appId: "ISI_APP_ID"
-};
-// Email guru harus sama dengan email yang diizinkan pada Firestore Rules.
-const TEACHER_EMAIL = "ISI_EMAIL_GURU";
-let db=null, auth=null, firebaseReady=false;
-try {
- if(firebaseConfig.apiKey!=="ISI_API_KEY" && firebaseConfig.projectId!=="ISI_PROJECT_ID"){
-  firebase.initializeApp(firebaseConfig); auth=firebase.auth(); db=firebase.firestore(); firebaseReady=true;
-  auth.signInAnonymously().catch(e=>console.warn("Login siswa anonim:",e.message));
- }
-} catch(e){console.warn(e)}
-const $=id=>document.getElementById(id);
-let questions=[], current=0, answers=[], score=0, checked=false, soundOn=true, level=1, student={}, teacherRows=[];
-const rawQuestions=[
-{t:"Pecahan",f:"pg",q:"Ibu memotong sebuah pizza menjadi 8 bagian sama besar. Adik makan 3 bagian. Pecahan pizza yang dimakan adik adalah …",v:"🍕 dibagi menjadi 8 potong; 3 potong dimakan",o:["🍕 3/8","🍕 5/8","🍕 3/5","🍕 8/3"],a:0,e:"Bagian yang dimakan adalah 3 dari 8 bagian seluruhnya, jadi 3/8."},
-{t:"Pecahan",f:"pg",q:"Pecahan yang senilai dengan 2/3 adalah …",o:["3/5","4/6","2/6","6/12"],a:1,e:"Kalikan pembilang dan penyebut 2/3 dengan 2: hasilnya 4/6."},
-{t:"Pecahan",f:"pg",q:"Hasil dari 1 1/2 + 2 1/4 adalah …",o:["3 1/4","3 1/2","3 3/4","4"],a:2,e:"1 1/2 = 1 2/4. Jadi 1 2/4 + 2 1/4 = 3 3/4."},
-{t:"Pecahan",f:"multi",q:"Pilih semua pecahan yang nilainya sama dengan 1/2.",o:["2/4","3/6","4/10","5/10"],a:[0,1,3],e:"2/4, 3/6, dan 5/10 semuanya dapat disederhanakan menjadi 1/2."},
-{t:"Pecahan",f:"tf",q:"Pernyataan: 3/4 lebih besar daripada 2/3.",o:["Benar","Salah"],a:0,e:"3/4 = 9/12 dan 2/3 = 8/12, sehingga 3/4 lebih besar."},
-{t:"Pecahan",f:"pg",q:"Bentuk pecahan biasa dari 2 3/5 adalah …",o:["5/2","10/5","13/5","12/5"],a:2,e:"(2 × 5) + 3 = 13, sehingga menjadi 13/5."},
-{t:"Pecahan",f:"pg",q:"Hasil 3/4 − 1/8 adalah …",o:["2/8","4/8","5/8","7/8"],a:2,e:"3/4 = 6/8. Maka 6/8 − 1/8 = 5/8."},
-{t:"Pecahan",f:"pg",q:"Urutan pecahan dari yang terkecil adalah …",o:["1/2, 1/4, 3/4","1/4, 1/2, 3/4","3/4, 1/2, 1/4","1/2, 3/4, 1/4"],a:1,e:"Dalam bentuk perempat: 1/4, 2/4, 3/4."},
-{t:"Desimal & Persen",f:"pg",q:"Bentuk desimal dari 7/10 adalah …",o:["0,07","0,7","7,0","0,17"],a:1,e:"Tujuh per sepuluh ditulis 0,7."},
-{t:"Desimal & Persen",f:"pg",q:"25% sama dengan pecahan …",o:["1/2","1/3","1/4","3/4"],a:2,e:"25/100 disederhanakan menjadi 1/4."},
-{t:"Desimal & Persen",f:"pg",q:"Hasil 2,5 + 1,75 adalah …",o:["3,25","4,15","4,25","4,75"],a:2,e:"2,50 + 1,75 = 4,25."},
-{t:"Desimal & Persen",f:"tf",q:"0,6 sama nilainya dengan 60%.",o:["Benar","Salah"],a:0,e:"0,6 × 100% = 60%."},
-{t:"Desimal & Persen",f:"pg",q:"Harga tas Rp80.000 mendapat diskon 10%. Besar diskonnya adalah …",o:["Rp4.000","Rp8.000","Rp10.000","Rp18.000"],a:1,e:"10% × Rp80.000 = Rp8.000."},
-{t:"Desimal & Persen",f:"multi",q:"Pilih semua bilangan yang nilainya lebih besar dari 0,5.",o:["45%","0,75","3/5","0,49"],a:[1,2],e:"0,75 dan 3/5 = 0,6 lebih besar dari 0,5."},
-{t:"Perkalian & Pembagian",f:"pg",q:"Hasil dari 125 × 24 adalah …",o:["2.500","2.750","3.000","3.250"],a:2,e:"125 × 24 = 125 × (20 + 4) = 2.500 + 500 = 3.000."},
-{t:"Perkalian & Pembagian",f:"pg",q:"Hasil 1.440 ÷ 12 adalah …",o:["100","110","120","140"],a:2,e:"12 × 120 = 1.440."},
-{t:"Perkalian & Pembagian",f:"pg",q:"Hasil 3/5 × 10 adalah …",o:["3","5","6","8"],a:2,e:"3/5 × 10 = 30/5 = 6."},
-{t:"Perkalian & Pembagian",f:"tf",q:"Bilangan 936 habis dibagi 3.",o:["Benar","Salah"],a:0,e:"Jumlah digit 9 + 3 + 6 = 18, habis dibagi 3."},
-{t:"Perkalian & Pembagian",f:"pg",q:"Sebuah toko memiliki 18 kotak pensil. Setiap kotak berisi 24 pensil. Jumlah seluruh pensil adalah …",o:["392","412","432","442"],a:2,e:"18 × 24 = 432 pensil."},
-{t:"Perkalian & Pembagian",f:"multi",q:"Pilih operasi yang hasilnya 48.",o:["6 × 8","96 ÷ 2","12 × 3","144 ÷ 3"],a:[0,1,3],e:"6×8=48, 96÷2=48, dan 144÷3=48."},
-{t:"Perkalian & Pembagian",f:"pg",q:"Ibu memiliki 2,4 kg tepung. Tepung dibagi sama banyak ke dalam 6 kantong. Isi setiap kantong adalah …",o:["0,2 kg","0,4 kg","0,6 kg","1,4 kg"],a:1,e:"2,4 ÷ 6 = 0,4 kg."},
-{t:"Soal Cerita & Logika",f:"pg",q:"Perpustakaan memiliki 245 buku cerita. Sekolah membeli 128 buku lagi, lalu 76 buku dipinjam. Buku yang tersisa adalah …",o:["287","297","307","317"],a:1,e:"245 + 128 − 76 = 297 buku."},
-{t:"Soal Cerita & Logika",f:"pg",q:"Pola bilangan 4, 8, 16, 32, … Bilangan berikutnya adalah …",o:["36","48","54","64"],a:3,e:"Setiap bilangan dikalikan 2. Jadi 32 × 2 = 64."},
-{t:"Soal Cerita & Logika",f:"tf",q:"Jika semua sisi persegi sama panjang, maka keliling persegi adalah 4 kali panjang sisinya.",o:["Benar","Salah"],a:0,e:"Persegi mempunyai empat sisi sama panjang, sehingga K = 4 × sisi."},
-{t:"Soal Cerita & Logika",f:"pg",q:"Dina membaca 15 halaman setiap hari selama 6 hari. Jika bukunya 120 halaman, sisa halaman yang belum dibaca adalah …",o:["20","25","30","35"],a:2,e:"15 × 6 = 90 halaman. 120 − 90 = 30 halaman."},
-{t:"Soal Cerita & Logika",f:"multi",q:"Di sebuah kelas, jumlah siswa 32 orang. Pilih pernyataan yang benar jika 3/8 siswa mengikuti klub sains.",o:["12 siswa ikut klub sains","20 siswa tidak ikut klub sains","1/4 siswa ikut klub sains","Jumlah siswa klub sains dan bukan klub sains 32"],a:[0,1,3],e:"3/8 × 32 = 12; sisanya 20. Jumlah keduanya 32."},
-{t:"Soal Cerita & Logika",f:"pg",q:"Rani lebih tinggi dari Budi. Budi lebih tinggi dari Sita. Siapakah yang paling pendek?",o:["Rani","Budi","Sita","Tidak dapat ditentukan"],a:2,e:"Urutan tinggi: Rani, Budi, lalu Sita. Jadi Sita paling pendek."},
-{t:"Soal Cerita & Logika",f:"pg",q:"Sebuah bus berangkat pukul 07.35 dan tiba pukul 10.05. Lama perjalanan adalah …",o:["2 jam 20 menit","2 jam 30 menit","2 jam 40 menit","3 jam 30 menit"],a:1,e:"Dari 07.35 ke 09.35 = 2 jam, lalu ke 10.05 = 30 menit."},
-{t:"Soal Cerita & Logika",f:"pg",q:"Empat anak membagi 3 kue sama besar. Setiap anak mendapat …",o:["1/2 kue","2/3 kue","3/4 kue","4/3 kue"],a:2,e:"3 kue dibagi 4 anak = 3/4 kue per anak."},
-{t:"Bangun Datar & Luas",f:"pg",q:"Sebuah persegi memiliki sisi 9 cm. Luasnya adalah …",v:"🟦 Persegi: sisi 9 cm",o:["18 cm²","36 cm²","72 cm²","81 cm²"],a:3,e:"Luas persegi = sisi × sisi = 9 × 9 = 81 cm²."},
-{t:"Bangun Datar & Luas",f:"pg",q:"Persegi panjang panjangnya 12 cm dan lebarnya 5 cm. Luasnya adalah …",v:"▭ p = 12 cm, l = 5 cm",o:["17 cm²","34 cm²","60 cm²","120 cm²"],a:2,e:"L = panjang × lebar = 12 × 5 = 60 cm²."},
-{t:"Bangun Datar & Luas",f:"pg",q:"Segitiga memiliki alas 10 cm dan tinggi 8 cm. Luasnya adalah …",v:"△ alas 10 cm; tinggi 8 cm",o:["18 cm²","40 cm²","80 cm²","90 cm²"],a:1,e:"Luas segitiga = 1/2 × alas × tinggi = 40 cm²."},
-{t:"Bangun Datar & Luas",f:"pg",q:"Keliling persegi dengan sisi 7 cm adalah …",o:["14 cm","21 cm","28 cm","49 cm"],a:2,e:"Keliling = 4 × 7 = 28 cm."},
-{t:"Bangun Datar & Luas",f:"tf",q:"Luas jajargenjang dihitung dengan alas dikalikan tinggi.",o:["Benar","Salah"],a:0,e:"Rumus luas jajargenjang adalah alas × tinggi."},
-{t:"Bangun Datar & Luas",f:"pg",q:"Sebuah trapesium memiliki sisi sejajar 8 cm dan 14 cm serta tinggi 5 cm. Luasnya …",o:["45 cm²","50 cm²","55 cm²","60 cm²"],a:2,e:"L = 1/2 × (8 + 14) × 5 = 55 cm²."},
-{t:"Bangun Datar & Luas",f:"multi",q:"Pilih semua bangun datar yang mempunyai 4 sisi.",o:["Persegi","Segitiga","Persegi panjang","Trapesium"],a:[0,2,3],e:"Persegi, persegi panjang, dan trapesium memiliki empat sisi."},
-{t:"Bangun Datar & Luas",f:"pg",q:"Luas sebuah lingkaran dengan jari-jari 7 cm (π = 22/7) adalah …",o:["44 cm²","77 cm²","154 cm²","308 cm²"],a:2,e:"L = π × r × r = 22/7 × 7 × 7 = 154 cm²."},
-{t:"Bangun Ruang",f:"pg",q:"Kubus memiliki … rusuk.",v:"🧊",o:["⬡ 6","🧊 8","📦 12","🔺 16"],a:2,e:"Kubus mempunyai 12 rusuk, 6 sisi, dan 8 titik sudut."},
-{t:"Bangun Ruang",f:"pg",q:"Balok memiliki panjang 8 cm, lebar 4 cm, dan tinggi 3 cm. Volumenya …",v:"📦 p=8 cm, l=4 cm, t=3 cm",o:["15 cm³","32 cm³","64 cm³","96 cm³"],a:3,e:"Volume balok = p × l × t = 8 × 4 × 3 = 96 cm³."},
-{t:"Bangun Ruang",f:"tf",q:"Kubus dan balok sama-sama memiliki 6 sisi.",o:["Benar","Salah"],a:0,e:"Keduanya mempunyai enam sisi."},
-{t:"Bangun Ruang",f:"pg",q:"Volume kubus dengan panjang rusuk 5 cm adalah …",o:["25 cm³","75 cm³","100 cm³","125 cm³"],a:3,e:"Volume kubus = s × s × s = 5 × 5 × 5 = 125 cm³."},
-{t:"Bangun Ruang",f:"multi",q:"Pilih semua benda yang bentuknya menyerupai tabung.",o:["Kaleng susu","Dadu","Gelas silinder","Bola basket"],a:[0,2],e:"Kaleng susu dan gelas silinder menyerupai tabung."},
-{t:"Bangun Ruang",f:"pg",q:"Bangun ruang yang mempunyai satu titik puncak dan alas berbentuk lingkaran adalah …",o:["🧊 Kubus","🍦 Kerucut","🥫 Tabung","📦 Balok"],a:1,e:"Kerucut memiliki alas lingkaran dan satu titik puncak."},
-{t:"Data & Penalaran",f:"pg",q:"Data buku yang dibaca: Ani 4, Beni 6, Cici 3, Dodi 7. Siapa membaca buku paling banyak?",v:"📊 Ani 4 | Beni 6 | Cici 3 | Dodi 7",o:["Ani","Beni","Cici","Dodi"],a:3,e:"Jumlah terbesar adalah 7 buku, yaitu Dodi."},
-{t:"Data & Penalaran",f:"pg",q:"Rata-rata dari 6, 8, 10, dan 12 adalah …",o:["8","9","10","11"],a:1,e:"(6 + 8 + 10 + 12) ÷ 4 = 36 ÷ 4 = 9."},
-{t:"Data & Penalaran",f:"tf",q:"Diagram batang dapat digunakan untuk membandingkan jumlah beberapa kategori.",o:["Benar","Salah"],a:0,e:"Diagram batang memudahkan perbandingan data antarkategori."},
-{t:"Data & Penalaran",f:"pg",q:"KPK dari 6 dan 8 adalah …",o:["12","18","24","48"],a:2,e:"Kelipatan 6: 6,12,18,24. Kelipatan 8: 8,16,24. KPK = 24."},
-{t:"Data & Penalaran",f:"pg",q:"FPB dari 24 dan 36 adalah …",o:["6","8","12","18"],a:2,e:"Faktor persekutuan terbesar 24 dan 36 adalah 12."},
-{t:"Data & Penalaran",f:"multi",q:"Pilih semua bilangan yang merupakan kelipatan 9.",o:["18","27","32","45"],a:[0,1,3],e:"18=9×2, 27=9×3, dan 45=9×5."},
-{t:"Data & Penalaran",f:"pg",q:"Sebuah pola dimulai dari 2, 5, 8, 11, … Aturan polanya adalah …",o:["Tambah 2","Tambah 3","Kali 2","Kurangi 3"],a:1,e:"Setiap bilangan bertambah 3."}
+// --- Data Soal ---
+const baseMathQuestions = [
+  { id: 'm1', type: 'PG', text: 'Hasil dari 1/2 + 1/4 adalah...', options: ['3/4', '2/6', '2/4', '1/6'], correct: ['3/4'], explanation: 'Samakan penyebut menjadi 4. 2/4 + 1/4 = 3/4.' },
+  { id: 'm2', type: 'TF', text: 'Benar atau Salah: Sebuah kubus dengan panjang rusuk 5 cm memiliki volume 125 cm³.', options: ['Benar', 'Salah'], correct: ['Benar'], explanation: 'Volume Kubus = s x s x s = 5 x 5 x 5 = 125.' },
+  { id: 'm3', type: 'MA', text: 'Pilih yang BUKAN merupakan bangun ruang!', options: ['Kubus', 'Segitiga', 'Balok', 'Lingkaran'], correct: ['Segitiga', 'Lingkaran'], explanation: 'Segitiga dan Lingkaran adalah bangun datar (2D), bukan bangun ruang (3D).' },
+  { id: 'm4', type: 'PG', text: 'Perbandingan uang Ali dan Budi adalah 2 : 3. Jika uang Budi Rp 15.000, berapa uang Ali?', options: ['Rp 10.000', 'Rp 5.000', 'Rp 20.000', 'Rp 30.000'], correct: ['Rp 10.000'], explanation: 'Uang Ali = (2/3) x 15.000 = 10.000.' },
+  { id: 'm5', type: 'TF', text: 'Benar atau Salah: Peluang munculnya angka genap pada pelemparan satu buah dadu adalah 1/2.', options: ['Benar', 'Salah'], correct: ['Benar'], explanation: 'Mata dadu genap: 2, 4, 6 (ada 3). Total mata dadu: 6. Peluang = 3/6 = 1/2.' },
+  { id: 'm6', type: 'PG', text: 'Sebuah balok memiliki panjang 10 cm, lebar 5 cm, dan tinggi 4 cm. Berapakah volumenya?', options: ['200 cm³', '100 cm³', '150 cm³', '50 cm³'], correct: ['200 cm³'], explanation: 'Volume Balok = p x l x t = 10 x 5 x 4 = 200.' },
+  { id: 'm7', type: 'MA', text: 'Manakah dari pecahan berikut yang senilai dengan 1/3?', options: ['2/6', '3/9', '4/10', '5/15'], correct: ['2/6', '3/9', '5/15'], explanation: 'Jika pembilang dan penyebut dikalikan angka yang sama, hasilnya senilai.' },
 ];
-questions=[]; let questionPool=[];
-function say(text){if(!soundOn||!("speechSynthesis"in window))return; speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang="id-ID";u.rate=.92;speechSynthesis.speak(u)}
-function beep(ok){if(!soundOn)return;try{let c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?660:220;g.gain.value=.07;o.start();o.stop(c.currentTime+.13)}catch(e){}}
-$("soundToggle").onclick=()=>{soundOn=!soundOn;$("soundToggle").textContent=soundOn?"🔊 Suara ON":"🔇 Suara OFF";if(!soundOn&&"speechSynthesis"in window)speechSynthesis.cancel()};
-$("teacherOpen").onclick=()=>{hideAll();$("teacher").classList.remove("hidden")};
-function hideAll(){["welcome","game","result","teacher"].forEach(x=>$(x).classList.add("hidden"))}
-$("startBtn").onclick=()=>{
- const name=$("studentName").value.trim(),cl=$("studentClass").value,date=$("examDate").value;
- if(!name||!cl||!date){alert("Lengkapi nama, kelas, dan tanggal terlebih dahulu.");return}
- student={name,cl,date};current=0;score=0;level=1;answers=[];selected=[];
- questionPool=rawQuestions.map((q,i)=>({...q,id:i,d:i<17?1:(i<34?2:3)}));
- questions=[];hideAll();$("game").classList.remove("hidden");pickNextQuestion();
+
+const baseIndoQuestions = [
+  { id: 'i1', type: 'PG', text: 'Karangan yang menggambarkan suatu objek secara rinci seolah-olah pembaca dapat melihat, mendengar, atau merasakannya disebut teks...', options: ['Naratif', 'Deskripsi', 'Eksposisi', 'Persuasi'], correct: ['Deskripsi'], explanation: 'Teks deskripsi bertujuan memberikan gambaran detail tentang suatu objek.' },
+  { id: 'i2', type: 'TF', text: 'Benar atau Salah: Surat resmi selalu dilengkapi dengan kop surat (kepala surat) dan nomor surat.', options: ['Benar', 'Salah'], correct: ['Benar'], explanation: 'Kop surat dan nomor surat adalah ciri utama yang membedakan surat resmi dan tidak resmi.' },
+  { id: 'i3', type: 'MA', text: 'Unsur-unsur berita yang baik harus mencakup unsur ADiKSiMBa. Manakah yang termasuk di dalamnya?', options: ['Apa', 'Siapa', 'Kapan', 'Kenapa tidak'], correct: ['Apa', 'Siapa', 'Kapan'], explanation: 'ADiKSiMBa singkatan dari Apa, Di mana, Kapan, Siapa, Mengapa, Bagaimana.' },
+  { id: 'i4', type: 'PG', text: 'Baris demi baris pada puisi disebut juga dengan...', options: ['Bait', 'Larik', 'Rima', 'Majas'], correct: ['Larik'], explanation: 'Larik adalah baris dalam puisi, sedangkan kumpulan larik membentuk bait.' },
+  { id: 'i5', type: 'TF', text: 'Benar atau Salah: Sinonim dari kata "Bohong" adalah "Jujur".', options: ['Benar', 'Salah'], correct: ['Salah'], explanation: 'Jujur adalah ANTONIM (lawan kata) dari Bohong. Sinonimnya adalah Dusta.' },
+  { id: 'i6', type: 'PG', text: 'Kalimat yang berisi perintah atau larangan disebut kalimat...', options: ['Tanya', 'Berita', 'Imperatif', 'Pasif'], correct: ['Imperatif'], explanation: 'Kalimat imperatif bersifat memerintah atau memberi instruksi.' },
+  { id: 'i7', type: 'MA', text: 'Pilih ciri-ciri pantun di bawah ini!', options: ['Terdiri dari 4 baris', 'Bersajak a-b-a-b', 'Baris 1 & 2 adalah isi', 'Baris 3 & 4 adalah isi'], correct: ['Terdiri dari 4 baris', 'Bersajak a-b-a-b', 'Baris 3 & 4 adalah isi'], explanation: 'Baris 1 dan 2 pada pantun merupakan sampiran, bukan isi.' },
+];
+
+// Helper to generate 50 questions
+const generate50Questions = (baseQuestions, subject) => {
+  let questions = [...baseQuestions];
+  let idCounter = 10;
+  
+  // Pad until 50
+  while (questions.length < 50) {
+    if (subject === 'matematika') {
+      // Generate dynamic math questions
+      const num1 = Math.floor(Math.random() * 20) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      const op = ['+', '-', 'x'][Math.floor(Math.random() * 3)];
+      let ans = 0;
+      if (op === '+') ans = num1 + num2;
+      if (op === '-') ans = num1 - num2;
+      if (op === 'x') ans = num1 * num2;
+      
+      const wrong1 = ans + (Math.floor(Math.random() * 5) + 1);
+      const wrong2 = ans - (Math.floor(Math.random() * 5) + 1);
+      const wrong3 = ans + 10;
+
+      const options = [ans.toString(), wrong1.toString(), wrong2.toString(), wrong3.toString()].sort(() => Math.random() - 0.5);
+
+      questions.push({
+        id: `gen_m_${idCounter++}`,
+        type: 'PG',
+        text: `Berapakah hasil dari ${num1} ${op} ${num2}?`,
+        options: [...new Set(options)], // ensure unique
+        correct: [ans.toString()],
+        explanation: `Perhitungan matematika dasar: ${num1} ${op} ${num2} = ${ans}`
+      });
+    } else {
+      // Duplicate and slightly vary Indo questions for filler to reach 50
+      const template = baseQuestions[Math.floor(Math.random() * baseQuestions.length)];
+      questions.push({
+        ...template,
+        id: `gen_i_${idCounter++}`,
+      });
+    }
+  }
+  return questions.slice(0, 50); // Ensure exactly 50
 };
-function pickNextQuestion(){
- const candidates=questionPool.filter(q=>q.d===level);
- const pool=candidates.length?candidates:questionPool;
- const next=pool[0];
- questionPool=questionPool.filter(q=>q.id!==next.id);
- questions.push(next);current=questions.length-1;renderQuestion();
+
+
+export default function App() {
+  const [user, setUser] = useState(null);
+  const [currentView, setCurrentView] = useState('landing'); // landing, material, quiz, certificate, dashboard
+  const [profile, setProfile] = useState({ name: '', studentClass: '6a', date: '' });
+  const [subject, setSubject] = useState('');
+  const [quizData, setQuizData] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [feedback, setFeedback] = useState(null); // { isCorrect, explanation }
+  
+  // Settings
+  const [settings, setSettings] = useState({ tts: true, sound: true });
+  
+  // Dashboard state
+  const [records, setRecords] = useState([]);
+  const [isSaving, setIsSaving] = useState(false);
+
+  // --- Auth & Firebase Init ---
+  useEffect(() => {
+    if (!auth) return;
+    const initAuth = async () => {
+      try {
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+      } catch (err) {
+        console.error("Auth error:", err);
+      }
+    };
+    initAuth();
+    const unsubscribe = onAuthStateChanged(auth, (u) => setUser(u));
+    return () => unsubscribe();
+  }, []);
+
+  // --- Dashboard Data Fetching ---
+  useEffect(() => {
+    if (!user || !db) return;
+    try {
+      const q = query(
+        collection(db, 'artifacts', appId, 'public', 'data', 'quizResults')
+      );
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        // Sort in memory to avoid complex index requirements
+        data.sort((a, b) => b.timestamp - a.timestamp);
+        setRecords(data);
+      }, (error) => console.error("Snapshot error:", error));
+      return () => unsubscribe();
+    } catch(err) {
+      console.error(err);
+    }
+  }, [user]);
+
+  // --- Audio Logic ---
+  const playSoundEffect = (type) => {
+    if (!settings.sound) return;
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      
+      if (type === 'correct') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+        osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.5);
+      } else if (type === 'wrong') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(300, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.3);
+      }
+    } catch(e) { console.error("Audio error", e) }
+  };
+
+  const speak = (text) => {
+    if (!settings.tts || !('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel(); // Stop current speech
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'id-ID';
+    window.speechSynthesis.speak(utterance);
+  };
+
+  // --- Handlers ---
+  const handleSelectSubject = async (selectedSub) => {
+    if (!profile.name || !profile.date) {
+      alert("Harap isi nama dan tanggal pengerjaan terlebih dahulu ya anak hebat!");
+      return;
+    }
+    
+    // Check Firebase jika sudah main di tanggal ini
+    if (user && db) {
+      try {
+        const q = query(
+          collection(db, 'artifacts', appId, 'public', 'data', 'quizResults'),
+          where('name', '==', profile.name),
+          where('class', '==', profile.studentClass),
+          where('date', '==', profile.date),
+          where('subject', '==', selectedSub)
+        );
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+          alert("Maaf ya, kamu sudah mengerjakan kuis mata pelajaran ini pada tanggal tersebut. Permainan hanya bisa dilakukan sekali per jadwal! Silakan coba pelajaran lain atau di hari berbeda.");
+          return;
+        }
+      } catch (err) {
+        console.error("Firebase check error", err);
+      }
+    }
+
+    setSubject(selectedSub);
+    setCurrentView('material');
+  };
+
+  const beginQuiz = () => {
+    const questions = generate50Questions(
+      subject === 'matematika' ? baseMathQuestions : baseIndoQuestions, 
+      subject
+    );
+    setQuizData(questions);
+    setCurrentIndex(0);
+    setScore(0);
+    setFeedback(null);
+    setSelectedAnswers([]);
+    setCurrentView('quiz');
+  };
+
+  // Auto-read question if TTS is on
+  useEffect(() => {
+    if (currentView === 'quiz' && settings.tts && quizData.length > 0 && !feedback) {
+       const q = quizData[currentIndex];
+       speak(q.text + ". Pilihan jawabannya adalah: " + q.options.join(". "));
+    }
+  }, [currentIndex, currentView, settings.tts, feedback]);
+
+  const handleAnswerSelect = (opt) => {
+    const q = quizData[currentIndex];
+    if (q.type === 'MA') {
+      if (selectedAnswers.includes(opt)) {
+        setSelectedAnswers(selectedAnswers.filter(a => a !== opt));
+      } else {
+        setSelectedAnswers([...selectedAnswers, opt]);
+      }
+    } else {
+      setSelectedAnswers([opt]);
+    }
+  };
+
+  const submitAnswer = () => {
+    const q = quizData[currentIndex];
+    let isCorrect = false;
+
+    if (q.type === 'MA') {
+      // Check if arrays match exactly
+      const sortedSelected = [...selectedAnswers].sort();
+      const sortedCorrect = [...q.correct].sort();
+      isCorrect = JSON.stringify(sortedSelected) === JSON.stringify(sortedCorrect);
+    } else {
+      isCorrect = selectedAnswers.length > 0 && selectedAnswers[0] === q.correct[0];
+    }
+
+    if (isCorrect) {
+      setScore(s => s + 2); // 50 questions * 2 = 100 max score
+      playSoundEffect('correct');
+    } else {
+      playSoundEffect('wrong');
+    }
+
+    setFeedback({ isCorrect, explanation: q.explanation });
+  };
+
+  const nextQuestion = async () => {
+    setFeedback(null);
+    setSelectedAnswers([]);
+    window.speechSynthesis.cancel();
+    
+    if (currentIndex + 1 < quizData.length) {
+      setCurrentIndex(i => i + 1);
+    } else {
+      // Finish Quiz
+      await saveResult();
+      setCurrentView('certificate');
+    }
+  };
+
+  const saveResult = async () => {
+    if (!user || !db) return;
+    setIsSaving(true);
+    try {
+      await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'quizResults'), {
+        name: profile.name,
+        class: profile.studentClass,
+        date: profile.date,
+        subject: subject,
+        score: score, // Final score out of 100
+        timestamp: Date.now()
+      });
+    } catch (e) {
+      console.error("Error saving doc: ", e);
+    }
+    setIsSaving(false);
+  };
+
+  const resetQuiz = () => {
+    setProfile({ name: '', studentClass: '6a', date: '' });
+    setCurrentView('landing');
+  };
+
+  // --- Export Functions ---
+  const exportCSV = () => {
+    const headers = ['Nama', 'Kelas', 'Tanggal', 'Mata Pelajaran', 'Nilai'];
+    const rows = records.map(r => [r.name, r.class, r.date, r.subject, r.score]);
+    const csvContent = "data:text/csv;charset=utf-8," 
+      + headers.join(",") + "\n" 
+      + rows.map(e => e.join(",")).join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "Rekap_Nilai_SD3MuaraRupit.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const exportWord = () => {
+    const tableHtml = document.getElementById('report-table').outerHTML;
+    const html = `
+      <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+      <head><meta charset='utf-8'><title>Laporan Nilai</title></head>
+      <body>
+        <h2 style="text-align: center;">Rekapitulasi Nilai Siswa SD Negeri 3 Muara Rupit</h2>
+        ${tableHtml}
+      </body>
+      </html>
+    `;
+    const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Laporan_Nilai.doc';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const printReport = () => {
+    window.print();
+  };
+
+
+  // --- Render Components ---
+
+  const renderLanding = () => (
+    <div className="flex flex-col items-center justify-center min-h-[80vh] p-4 animate-in fade-in zoom-in duration-500">
+      <div className="bg-white/90 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border-4 border-yellow-300 max-w-lg w-full text-center relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-[-20px] left-[-20px] w-24 h-24 bg-pink-300 rounded-full opacity-50 blur-xl"></div>
+        <div className="absolute bottom-[-20px] right-[-20px] w-32 h-32 bg-blue-300 rounded-full opacity-50 blur-xl"></div>
+        
+        <h1 className="text-3xl font-extrabold text-blue-600 mb-2 relative z-10">
+          Assalamu'alaikum Anak Hebat! 🌟
+        </h1>
+        <h2 className="text-xl font-bold text-gray-700 mb-6 relative z-10">SD Negeri 3 Muara Rupit</h2>
+        
+        <div className="space-y-4 text-left relative z-10">
+          <div>
+            <label className="block text-gray-700 font-bold mb-1">Nama Lengkap:</label>
+            <input 
+              type="text" 
+              value={profile.name}
+              onChange={e => setProfile({...profile, name: e.target.value})}
+              className="w-full p-3 rounded-xl border-2 border-blue-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-200 outline-none transition-all"
+              placeholder="Tulis namamu di sini..."
+            />
+          </div>
+          <div className="flex space-x-4">
+            <div className="flex-1">
+              <label className="block text-gray-700 font-bold mb-1">Kelas:</label>
+              <select 
+                value={profile.studentClass}
+                onChange={e => setProfile({...profile, studentClass: e.target.value})}
+                className="w-full p-3 rounded-xl border-2 border-blue-200 focus:border-blue-500 outline-none"
+              >
+                <option value="6a">6 A</option>
+                <option value="6b">6 B</option>
+              </select>
+            </div>
+            <div className="flex-1">
+              <label className="block text-gray-700 font-bold mb-1">Tanggal Pengerjaan:</label>
+              <input 
+                type="date" 
+                value={profile.date}
+                onChange={e => setProfile({...profile, date: e.target.value})}
+                className="w-full p-3 rounded-xl border-2 border-blue-200 focus:border-blue-500 outline-none"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 bg-yellow-50 p-4 rounded-xl border-2 border-yellow-200 text-sm text-left text-gray-700 relative z-10 shadow-sm">
+          <p className="font-bold mb-1 text-yellow-800">📌 Petunjuk Pengerjaan:</p>
+          <ul className="list-disc pl-5 space-y-1 text-yellow-900 font-medium">
+            <li>Isi nama lengkap, pilih kelas, dan masukkan tanggal pengerjaan hari ini.</li>
+            <li>Setiap siswa hanya bisa mengerjakan kuis <strong>1 kali</strong> per mata pelajaran di tanggal yang sama.</li>
+            <li>Ada soal Pilihan Ganda, Benar/Salah, dan memilih Jawaban Lebih dari Satu.</li>
+            <li>Gunakan tombol di pojok kanan atas untuk mematikan/menghidupkan suara soal.</li>
+          </ul>
+        </div>
+
+        <div className="mt-8 relative z-10">
+          <p className="text-gray-600 mb-3 font-semibold">Pilih Mata Pelajaran:</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+              onClick={() => handleSelectSubject('bahasa indonesia')}
+              className="flex-1 bg-gradient-to-r from-red-400 to-pink-500 hover:from-red-500 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-2xl shadow-lg transform transition hover:scale-105"
+            >
+              📖 TKA B. Indonesia
+            </button>
+            <button 
+              onClick={() => handleSelectSubject('matematika')}
+              className="flex-1 bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600 text-white font-bold py-3 px-6 rounded-2xl shadow-lg transform transition hover:scale-105"
+            >
+              🧮 TKA Matematika
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      {/* Hidden button for dashboard access */}
+      <button 
+        onClick={() => setCurrentView('dashboard')}
+        className="fixed bottom-4 right-4 w-8 h-8 opacity-10 hover:opacity-100 transition-opacity flex items-center justify-center"
+        title="Area Guru"
+      >
+        <ShieldAlert size={16} />
+      </button>
+    </div>
+  );
+
+  const renderQuiz = () => {
+    if (quizData.length === 0) return null;
+    const q = quizData[currentIndex];
+
+    return (
+      <div className="flex flex-col items-center justify-start min-h-[90vh] p-4 w-full max-w-3xl mx-auto">
+        {/* Header Bar */}
+        <div className="w-full bg-white rounded-2xl shadow-md p-4 mb-6 flex justify-between items-center border-b-4 border-blue-400">
+          <div className="flex items-center gap-4">
+            <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-bold">
+              Soal {currentIndex + 1} / 50
+            </div>
+            <div className="text-sm font-semibold text-gray-600 hidden sm:block">
+              {profile.name} - Kelas {profile.studentClass.toUpperCase()}
+            </div>
+          </div>
+          
+          <div className="flex gap-2">
+             <button 
+              onClick={() => setSettings(s => ({...s, tts: !s.tts}))}
+              className={`p-2 rounded-full ${settings.tts ? 'bg-green-100 text-green-600' : 'bg-gray-200 text-gray-400'}`}
+              title="Narasi Suara"
+            >
+              {settings.tts ? <Volume2 size={20} /> : <VolumeX size={20} />}
+            </button>
+            <button 
+              onClick={() => setSettings(s => ({...s, sound: !s.sound}))}
+              className={`p-2 rounded-full ${settings.sound ? 'bg-purple-100 text-purple-600' : 'bg-gray-200 text-gray-400'}`}
+              title="Efek Suara"
+            >
+              {settings.sound ? <Music size={20} /> : <Music3 size={20} />}
+            </button>
+          </div>
+        </div>
+
+        {/* Question Card */}
+        <div className="bg-white w-full rounded-3xl shadow-xl p-6 sm:p-8 border-2 border-dashed border-gray-300 relative animate-in slide-in-from-bottom-4 duration-300">
+           <button 
+              onClick={() => speak(q.text + ". " + q.options.join(". "))}
+              className="absolute top-4 right-4 bg-blue-50 p-2 rounded-full text-blue-500 hover:bg-blue-100 transition"
+              title="Bacakan Soal"
+            >
+              <Volume2 size={24} />
+           </button>
+
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 pr-10 leading-relaxed">
+            {q.text}
+          </h2>
+
+          <div className="space-y-3">
+            {q.type === 'MA' && <p className="text-sm text-pink-500 font-bold mb-2">*Pilih semua jawaban yang benar</p>}
+            
+            {q.options.map((opt, idx) => {
+              const isSelected = selectedAnswers.includes(opt);
+              return (
+                <div 
+                  key={idx}
+                  onClick={() => !feedback && handleAnswerSelect(opt)}
+                  className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 flex items-center gap-3
+                    ${feedback ? 'opacity-80 cursor-not-allowed' : 'hover:border-blue-400 hover:bg-blue-50'}
+                    ${isSelected ? 'border-blue-500 bg-blue-100 shadow-md transform scale-[1.01]' : 'border-gray-200'}
+                  `}
+                >
+                  <div className={`w-6 h-6 rounded flex items-center justify-center border-2 
+                    ${q.type === 'MA' ? 'rounded-md' : 'rounded-full'}
+                    ${isSelected ? 'border-blue-500 bg-blue-500' : 'border-gray-400'}
+                  `}>
+                    {isSelected && <CheckCircle size={16} className="text-white" />}
+                  </div>
+                  <span className="text-lg font-medium text-gray-700">{opt}</span>
+                </div>
+              )
+            })}
+          </div>
+
+          {!feedback ? (
+            <button 
+              onClick={submitAnswer}
+              disabled={selectedAnswers.length === 0}
+              className={`w-full mt-8 py-4 rounded-xl font-bold text-xl transition-all shadow-lg
+                ${selectedAnswers.length > 0 
+                  ? 'bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white transform hover:-translate-y-1' 
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'}
+              `}
+            >
+              Cek Jawaban!
+            </button>
+          ) : (
+            <div className={`mt-6 p-6 rounded-2xl animate-in zoom-in duration-300 ${feedback.isCorrect ? 'bg-green-100 border-2 border-green-400' : 'bg-red-100 border-2 border-red-400'}`}>
+              <div className="flex items-start gap-4">
+                {feedback.isCorrect ? (
+                  <CheckCircle size={40} className="text-green-600 flex-shrink-0" />
+                ) : (
+                  <XCircle size={40} className="text-red-600 flex-shrink-0" />
+                )}
+                <div>
+                  <h3 className={`text-xl font-bold mb-2 ${feedback.isCorrect ? 'text-green-700' : 'text-red-700'}`}>
+                    {feedback.isCorrect ? 'Wah, Jawabanmu Tepat Sekali! 🌟' : 'Tetap Semangat, Yuk Pelajari Lagi! 💪'}
+                  </h3>
+                  <p className="text-gray-700 text-lg leading-relaxed">{feedback.explanation}</p>
+                </div>
+              </div>
+              <button 
+                onClick={nextQuestion}
+                className={`w-full mt-4 py-3 rounded-xl font-bold text-white shadow-md flex items-center justify-center gap-2
+                  ${feedback.isCorrect ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'}
+                `}
+              >
+                {currentIndex + 1 === quizData.length ? 'Selesai & Lihat Nilai' : 'Lanjut Soal Berikutnya'} <ArrowRight size={20} />
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const renderCertificate = () => (
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 py-10 w-full animate-in zoom-in duration-700">
+      
+      {/* Action Buttons (Hide when printing) */}
+      <div className="mb-6 flex gap-4 print:hidden">
+        <button onClick={printReport} className="flex items-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-700 shadow-lg">
+          <Printer size={20}/> Cetak / PDF
+        </button>
+        <button onClick={resetQuiz} className="flex items-center gap-2 bg-gray-200 text-gray-800 px-6 py-2 rounded-lg font-bold hover:bg-gray-300 shadow-lg">
+          Main Lagi
+        </button>
+      </div>
+
+      {/* Certificate Container */}
+      <div 
+        id="certificate-print"
+        className="bg-white w-full max-w-4xl border-[16px] border-double border-yellow-400 p-8 sm:p-16 text-center relative shadow-2xl overflow-hidden"
+        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23fef08a\' fill-opacity=\'0.2\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}
+      >
+        <div className="absolute top-10 left-10 text-yellow-500 opacity-20"><Award size={100} /></div>
+        <div className="absolute bottom-10 right-10 text-yellow-500 opacity-20"><Award size={100} /></div>
+
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-800 mb-2 uppercase tracking-wider">
+          Sertifikat Penghargaan
+        </h1>
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-600 mb-8">SD Negeri 3 Muara Rupit</h2>
+
+        <p className="text-lg text-gray-700 mb-2">Diberikan dengan bangga kepada:</p>
+        <h3 className="text-3xl sm:text-4xl font-bold text-pink-600 mb-2 underline decoration-wavy decoration-yellow-400">
+          {profile.name}
+        </h3>
+        <p className="text-xl font-bold text-gray-700 mb-8">Kelas {profile.studentClass.toUpperCase()}</p>
+
+        <p className="text-lg text-gray-700 mb-4 max-w-2xl mx-auto leading-relaxed">
+          Telah berhasil menyelesaikan kuis interaktif mata pelajaran <strong className="text-blue-600 uppercase">{subject}</strong> dengan penuh semangat dan antusiasme!
+        </p>
+
+        <div className="my-8 inline-block bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-full p-8 shadow-inner border-4 border-yellow-200">
+           <div className="bg-white rounded-full w-32 h-32 flex flex-col items-center justify-center shadow-lg">
+             <span className="text-sm font-bold text-gray-500">NILAI AKHIR</span>
+             <span className="text-5xl font-black text-blue-600">{score}</span>
+           </div>
+        </div>
+
+        <div className="mt-12 flex justify-between items-end px-4 sm:px-12 text-sm sm:text-base">
+          <div className="text-center">
+            <p className="mb-12 text-gray-700">Guru Kelas</p>
+            <p className="font-bold border-b border-gray-800 pb-1 inline-block min-w-[150px]">RASMILA BR GINTING</p>
+            <p className="text-xs text-gray-500 mt-1">NIP. 198804162025212082</p>
+          </div>
+          <div className="text-center">
+            <p className="mb-12 text-gray-700">Muara Rupit, {new Date(profile.date).toLocaleDateString('id-ID')}<br/>Kepala Sekolah</p>
+            <p className="font-bold border-b border-gray-800 pb-1 inline-block min-w-[150px]">CANDRA MELATI PUTRA, S.Pd.,M.Pd</p>
+            <p className="text-xs text-gray-500 mt-1">NIP. 199009212017081001</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderMaterial = () => (
+    <div className="flex flex-col items-center justify-center min-h-[80vh] p-4 animate-in fade-in zoom-in duration-500">
+      <div className="bg-white/90 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border-4 border-blue-300 max-w-2xl w-full text-center relative overflow-hidden">
+        <h2 className="text-3xl font-extrabold text-blue-600 mb-2">Ringkasan Materi Kelas 6</h2>
+        <h3 className="text-xl font-bold text-gray-600 mb-6 capitalize bg-yellow-100 inline-block px-4 py-1 rounded-full shadow-sm">
+          Mata Pelajaran: {subject}
+        </h3>
+        
+        <div className="text-left text-gray-700 space-y-4 text-base sm:text-lg mb-8 bg-blue-50 p-6 rounded-xl border-2 border-blue-200 shadow-inner">
+          {subject === 'matematika' ? (
+            <ul className="list-disc pl-5 space-y-3">
+              <li><strong>Operasi Hitung Bilangan & Pecahan:</strong> Mengingat kembali operasi campuran pada bilangan cacah, desimal, dan pecahan.</li>
+              <li><strong>Bangun Ruang (Geometri):</strong> Mempelajari sifat-sifat prisma, tabung, limas, kerucut, dan bola, serta cara menghitung volume dan luas permukaannya.</li>
+              <li><strong>Statistika Data:</strong> Membaca data, menyajikan dalam diagram (batang, lingkaran, garis), dan menentukan rata-rata (mean), median, serta modus.</li>
+            </ul>
+          ) : (
+            <ul className="list-disc pl-5 space-y-3">
+              <li><strong>Teks Eksplanasi & Pidato:</strong> Mengidentifikasi informasi penting dari teks ilmiah, dan membuat naskah pidato persuasif sederhana.</li>
+              <li><strong>Karya Sastra (Puisi & Cerita):</strong> Mengenal makna kiasan dalam puisi, serta menentukan unsur intrinsik (tokoh, latar, amanat) dalam cerita pendek.</li>
+              <li><strong>Tata Bahasa & Kosakata Baku:</strong> Penggunaan huruf kapital, kosakata baku sesuai EBI (Ejaan Bahasa Indonesia), dan penggunaan kalimat efektif pada formulir/surat resmi.</li>
+            </ul>
+          )}
+        </div>
+
+        <button 
+          onClick={beginQuiz}
+          className="w-full bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-bold py-4 px-8 rounded-2xl shadow-lg transform transition hover:scale-105 text-2xl flex items-center justify-center gap-3"
+        >
+          Siap! Mulai Kuis 🚀
+        </button>
+      </div>
+    </div>
+  );
+
+  const renderDashboard = () => (
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-8 animate-in fade-in">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-800">Dasbor Guru</h1>
+            <p className="text-gray-500">Rekapitulasi Nilai Siswa Real-time</p>
+          </div>
+          <button 
+            onClick={() => setCurrentView('landing')}
+            className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 font-medium transition"
+          >
+            Kembali ke Beranda
+          </button>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-8">
+          <div className="flex gap-4 mb-6 flex-wrap">
+            <button onClick={exportCSV} className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition shadow-sm">
+              <Download size={18}/> Excel (CSV)
+            </button>
+            <button onClick={exportWord} className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition shadow-sm">
+              <Download size={18}/> Word (.doc)
+            </button>
+            <button onClick={printReport} className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-900 transition shadow-sm">
+              <Printer size={18}/> Cetak PDF
+            </button>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-gray-200">
+            <table id="report-table" className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gray-100 text-gray-700 border-b-2 border-gray-200">
+                  <th className="p-4 font-bold">No</th>
+                  <th className="p-4 font-bold">Nama Siswa</th>
+                  <th className="p-4 font-bold">Kelas</th>
+                  <th className="p-4 font-bold">Mata Pelajaran</th>
+                  <th className="p-4 font-bold">Tanggal</th>
+                  <th className="p-4 font-bold text-center">Nilai Akhir</th>
+                </tr>
+              </thead>
+              <tbody>
+                {records.length === 0 ? (
+                  <tr><td colSpan="6" className="p-8 text-center text-gray-500">Belum ada data kuis yang diselesaikan.</td></tr>
+                ) : (
+                  records.map((r, i) => (
+                    <tr key={r.id} className="border-b border-gray-100 hover:bg-gray-50 transition">
+                      <td className="p-4">{i + 1}</td>
+                      <td className="p-4 font-medium text-gray-800">{r.name}</td>
+                      <td className="p-4 uppercase">{r.class}</td>
+                      <td className="p-4 capitalize">{r.subject}</td>
+                      <td className="p-4">{r.date}</td>
+                      <td className="p-4 text-center font-bold text-blue-600">{r.score}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-pink-50 font-sans text-gray-900 selection:bg-blue-200 print:bg-white print:p-0">
+      
+      {/* Global Print Styles embedded */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @media print {
+          body * { visibility: hidden; }
+          #certificate-print, #certificate-print * { visibility: visible; }
+          #certificate-print { position: absolute; left: 0; top: 0; width: 100%; border: none !important; box-shadow: none !important; padding: 20px !important; }
+          
+          #report-table, #report-table * { visibility: visible; }
+          #report-table { position: absolute; left: 0; top: 0; width: 100%; border-collapse: collapse; }
+          #report-table th, #report-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        }
+      `}} />
+
+      {currentView === 'landing' && renderLanding()}
+      {currentView === 'material' && renderMaterial()}
+      {currentView === 'quiz' && renderQuiz()}
+      {currentView === 'certificate' && renderCertificate()}
+      {currentView === 'dashboard' && renderDashboard()}
+      
+    </div>
+  );
 }
-function renderQuestion(){
- checked=false;let q=questions[current];$("qCounter").textContent=`Soal ${current+1}/50`;$("qTopic").textContent=q.t;$("qLevel").textContent=`Level ${level}`;$("liveScore").textContent=`Skor: ${score}`;$("progressBar").style.width=(current/50*100)+"%";$("questionText").textContent=q.q;
- $("questionVisual").classList.toggle("hidden",!q.v);$("questionVisual").textContent=q.v||"";
- $("options").innerHTML="";$("feedback").classList.add("hidden");$("answerBtn").classList.remove("hidden");$("nextBtn").classList.add("hidden");
- if(q.f==="multi"){$("questionText").textContent+=" (Pilih semua jawaban yang benar.)"}
- q.o.forEach((v,i)=>{let b=document.createElement("button");b.className="opt";b.innerHTML=`<span>${q.f==="tf"?"":String.fromCharCode(65+i)+". "}</span><span>${v}</span>`;b.onclick=()=>selectOption(i,b);$("options").appendChild(b)});
-}
-let selected=[];
-function selectOption(i,b){if(checked)return;let q=questions[current];if(q.f==="multi"){if(selected.includes(i)){selected=selected.filter(x=>x!==i);b.classList.remove("selected")}else{selected.push(i);b.classList.add("selected")}}else{selected=[i];[...$("options").children].forEach(x=>x.classList.remove("selected"));b.classList.add("selected")}}
-$("answerBtn").onclick=()=>{
- if(!selected.length){alert("Pilih jawaban terlebih dahulu.");return}
- checked=true;let q=questions[current],correct=Array.isArray(q.a)?q.a.slice().sort().join(",")===selected.slice().sort().join(","):selected[0]===q.a;
- if(correct)score+=2;
- answers.push({question:q.q,topic:q.t,correct,selected:selected.slice(),key:q.a});
- [...$("options").children].forEach((b,i)=>{let yes=Array.isArray(q.a)?q.a.includes(i):q.a===i;if(yes)b.classList.add("correct");else if(selected.includes(i))b.classList.add("wrong");b.disabled=true});
- $("feedback").className="feedback "+(correct?"good":"bad");$("feedback").innerHTML=(correct?"🌟 <b>Hebat! Jawabanmu benar.</b> ":"💪 <b>Tetap semangat! Jawaban yang tepat belum sesuai.</b> ")+q.e;
- beep(correct);$("answerBtn").classList.add("hidden");$("nextBtn").classList.remove("hidden");$("liveScore").textContent=`Skor: ${score}`;
- // Adaptive level changes based on the student's running accuracy.
- let acc=answers.filter(x=>x.correct).length/answers.length;
- // Penyesuaian kesulitan: akurasi >=80% naik ke level 3; >=55% ke level 2; selebihnya level 1.
- level=acc>=.8?3:acc>=.55?2:1;
- $("qLevel").textContent=`Level ${level}`;
-};
-$("nextBtn").onclick=()=>{selected=[];if(questions.length>=50)finish();else pickNextQuestion()};
-$("readBtn").onclick=()=>say(questions[current].q+" "+questions[current].o.join(". "));
-async function finish(){
- hideAll();$("result").classList.remove("hidden");let correct=answers.filter(x=>x.correct).length,finalScore=Math.round(correct/50*100);
- $("resultSummary").innerHTML=`<h3>${student.name} · ${student.cl}</h3><p>Jawaban benar: <b>${correct} dari 50</b></p><h2 style="color:#5146d8;font-size:42px">${finalScore}</h2><p>Level akhir: ${level}</p>`;
- $("certName").textContent=student.name;$("certClass").textContent=`Kelas ${student.cl} · SD Negeri 3 Muara Rupit`;$("certScore").textContent=`NILAI ${finalScore}`;$("certDate").textContent=`Tanggal: ${student.date}`;
- let record={...student,correct,score:finalScore,level,createdAt:new Date().toISOString(),answers};
- $("saveStatus").textContent="Menyimpan hasil...";
- try{
-  if(firebaseReady){await auth.signInAnonymously().catch(()=>{});await db.collection("Hasil_TKA_Matematika").add(record);$("saveStatus").textContent="✅ Hasil berhasil disimpan ke cloud Firebase."}
-  else{$("saveStatus").textContent="⚠️ Firebase belum dikonfigurasi. Hasil ini belum tersimpan ke cloud."}
- }catch(e){$("saveStatus").textContent="Gagal menyimpan ke cloud: "+e.message}
- window.lastRecord=record;
-}
-$("playAgain").onclick=()=>{hideAll();$("welcome").classList.remove("hidden");$("studentName").value=student.name;$("studentClass").value=student.cl;$("examDate").value=student.date};
-$("printCert").onclick=()=>{let w=window.open("","_blank");if(!w){alert("Izinkan pop-up untuk mencetak sertifikat.");return}w.document.write(`<html><head><title>Sertifikat</title><style>body{font-family:Arial;padding:35px}.certificate{border:9px double #d7ad43;padding:35px;text-align:center;background:#fffdf4;color:#25265c}.student{font-size:28px;font-weight:bold;color:#138b91}h2{color:#5146d8}.sign{display:flex;justify-content:space-around;margin-top:60px}</style></head><body>${$("certificate").outerHTML}</body></html>`);w.document.close();w.print()};
-$("teacherLoginBtn").onclick=async()=>{
- if(!firebaseReady){$("loginMessage").textContent="Isi firebaseConfig terlebih dahulu di index.html.";return}
- let email=$("teacherEmail").value.trim(),pass=$("teacherPassword").value;
- try{let cred=await auth.signInWithEmailAndPassword(email,pass);if(email.toLowerCase()!==TEACHER_EMAIL.toLowerCase()){await auth.signOut();throw new Error("Email ini tidak memiliki akses dasbor guru.")}$("teacherLogin").classList.add("hidden");$("teacherPanel").classList.remove("hidden");await loadTeacherData()}
- catch(e){$("loginMessage").textContent="Gagal masuk: "+e.message}
-};
-async function loadTeacherData(){
- try{let snap=await db.collection("Hasil_TKA_Matematika").orderBy("createdAt","desc").get();teacherRows=snap.docs.map(d=>d.data());$("totalAttempts").textContent=teacherRows.length+" percobaan";$("resultsBody").innerHTML="";
- if(!teacherRows.length)$("resultsBody").innerHTML='<tr><td colspan="6">Belum ada data.</td></tr>';
- teacherRows.forEach(r=>{let tr=document.createElement("tr");[r.name,r.cl,r.date,r.correct,r.score,r.level].forEach(v=>{let td=document.createElement("td");td.textContent=v??"";tr.appendChild(td)});$("resultsBody").appendChild(tr)})}
- catch(e){$("resultsBody").innerHTML=`<tr><td colspan="6">Tidak dapat membaca data: ${e.message}</td></tr>`}
-}
-$("refreshData").onclick=loadTeacherData;
-$("teacherLogout").onclick=async()=>{if(auth)await auth.signOut();$("teacherLogin").classList.remove("hidden");$("teacherPanel").classList.add("hidden");$("teacherPassword").value=""};
-function exportRows(){return teacherRows.map(r=>({"Nama Siswa":r.name,"Kelas":r.cl,"Tanggal":r.date,"Jawaban Benar":r.correct,"Nilai":r.score,"Level Akhir":r.level,"Waktu Simpan":r.createdAt}))}
-$("exportExcel").onclick=()=>{if(!teacherRows.length)return alert("Belum ada data.");let ws=XLSX.utils.json_to_sheet(exportRows()),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Hasil TKA Matematika");XLSX.writeFile(wb,"Rekap_TKA_Matematika_SD_Muara_Rupit.xlsx")};
-$("exportPDF").onclick=()=>{if(!teacherRows.length)return alert("Belum ada data.");let {jsPDF}=window.jspdf,doc=new jsPDF();doc.text("REKAP HASIL TKA MATEMATIKA",14,16);doc.text("SD NEGERI 3 MUARA RUPIT",14,24);let y=36;teacherRows.forEach((r,i)=>{let line=`${i+1}. ${r.name} | ${r.cl} | ${r.date} | Benar ${r.correct}/50 | Nilai ${r.score}`;doc.text(line,14,y);y+=8;if(y>280){doc.addPage();y=18}});doc.save("Rekap_TKA_Matematika.pdf")};
-$("exportWord").onclick=async()=>{if(!teacherRows.length)return alert("Belum ada data.");try{const {Document,Packer,Paragraph,TextRun}=docx;let children=[new Paragraph({children:[new TextRun({text:"REKAP HASIL TKA MATEMATIKA",bold:true,size:30})]}),new Paragraph("SD NEGERI 3 MUARA RUPIT")];teacherRows.forEach((r,i)=>children.push(new Paragraph(`${i+1}. ${r.name} | ${r.cl} | ${r.date} | Benar ${r.correct}/50 | Nilai ${r.score}`)));let d=new Document({sections:[{children}]});let blob=await Packer.toBlob(d);let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Rekap_TKA_Matematika.docx";a.click();URL.revokeObjectURL(a.href)}catch(e){alert("Ekspor Word gagal: "+e.message)}};
-</script>
-</body></html>
